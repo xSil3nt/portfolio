@@ -3,18 +3,120 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light" />
-    <title>Empty Page</title>
+    <title>Shazin — Portfolio</title>
     <style>
-      html,
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
       body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        background: #ffffff;
+        font-family: system-ui, sans-serif;
+        color: #1a1a1a;
+        background: #fff;
+        line-height: 1.6;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      /* Nav */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 2rem;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      nav .logo { font-weight: 700; font-size: 1.1rem; }
+      nav ul { list-style: none; display: flex; gap: 2rem; }
+      nav ul a:hover { text-decoration: underline; }
+
+      /* Sections */
+      section { padding: 5rem 2rem; max-width: 800px; margin: 0 auto; }
+
+      /* Hero */
+      #hero { padding-top: 6rem; }
+      #hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+      #hero p { font-size: 1.15rem; color: #555; }
+
+      /* About */
+      #about h2 { font-size: 1.6rem; margin-bottom: 1rem; }
+      #about p { color: #444; }
+
+      /* Projects */
+      #projects h2 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.25rem;
+      }
+      .card {
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 1.25rem;
+      }
+      .card h3 { margin-bottom: 0.5rem; }
+      .card p { font-size: 0.9rem; color: #555; }
+
+      /* Contact */
+      #contact h2 { font-size: 1.6rem; margin-bottom: 1rem; }
+      #contact p { color: #444; }
+      #contact a { text-decoration: underline; }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        border-top: 1px solid #e5e5e5;
+        font-size: 0.85rem;
+        color: #888;
       }
     </style>
   </head>
-  <body></body>
-</html>
+  <body>
 
+    <nav>
+      <span class="logo">Shazin</span>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section id="hero">
+      <h1>Hi, I'm Shazin.</h1>
+      <p>Developer · Builder · [Your tagline here]</p>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>Short bio about who you are, what you do, and what you care about.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="card">
+          <h3>Project One</h3>
+          <p>Brief description of what this project does.</p>
+        </div>
+        <div class="card">
+          <h3>Project Two</h3>
+          <p>Brief description of what this project does.</p>
+        </div>
+        <div class="card">
+          <h3>Project Three</h3>
+          <p>Brief description of what this project does.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Reach me at <a href="mailto:ahmedshazin21@gmail.com">ahmedshazin21@gmail.com</a></p>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Shazin</p>
+    </footer>
+
+  </body>
+</html>
