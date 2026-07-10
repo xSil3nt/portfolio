@@ -7,26 +7,39 @@
       name="description"
       content="Shazin is a computer engineering student working across embedded systems, robotics, simulation and open-source software."
     />
-    <meta name="theme-color" content="#f6f5f0" />
-    <meta property="og:title" content="Shazin" />
-    <meta
-      property="og:description"
-      content="Computer engineering, embedded systems, simulation and open-source software."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://shazin.dev/" />
-    <link rel="canonical" href="https://shazin.dev/" />
+    <meta name="theme-color" content="#f0eee8" />
     <title>Shazin</title>
     <style>
       :root {
         color-scheme: light;
-        --background: #f6f5f0;
-        --surface: #eeece5;
-        --text: #20211f;
-        --muted: #62645e;
-        --line: #d6d3ca;
-        --accent: #265f4d;
-        --content-width: 760px;
+        --paper: #f0eee8;
+        --paper-raised: #f8f7f3;
+        --ink: #171816;
+        --muted: #66675f;
+        --line: #ccc9bf;
+        --soft-line: #dedbd2;
+        --accent: #d54f30;
+        --accent-soft: #f0d4ca;
+        --dark-panel: #1b1d1b;
+        --dark-muted: #aeb1aa;
+        --max-width: 1180px;
+        --serif: Georgia, "Times New Roman", serif;
+        --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      html[data-theme="dark"] {
+        color-scheme: dark;
+        --paper: #24231f;
+        --paper-raised: #2d2b26;
+        --ink: #f2efe6;
+        --muted: #b7b2a7;
+        --line: #514e46;
+        --soft-line: #3a3832;
+        --accent: #ef765a;
+        --accent-soft: #55342b;
+        --dark-panel: #1b1a17;
+        --dark-muted: #aaa69c;
       }
 
       *,
@@ -41,19 +54,33 @@
 
       body {
         margin: 0;
-        color: var(--text);
-        background: var(--background);
-        font-family: Arial, Helvetica, sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: var(--sans);
         font-size: 16px;
-        line-height: 1.6;
+        line-height: 1.55;
         text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+          linear-gradient(to right, color-mix(in srgb, var(--line) 22%, transparent) 1px, transparent 1px),
+          linear-gradient(to bottom, color-mix(in srgb, var(--line) 16%, transparent) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: linear-gradient(to bottom, #000 0, transparent 42rem);
       }
 
       a {
         color: inherit;
-        text-decoration-color: var(--line);
-        text-underline-offset: 0.2em;
         text-decoration-thickness: 1px;
+        text-underline-offset: 0.22em;
+        text-decoration-color: var(--line);
       }
 
       a:hover {
@@ -61,165 +88,384 @@
         text-decoration-color: currentColor;
       }
 
-      a:focus-visible {
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      :focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 4px;
-        border-radius: 2px;
       }
 
       .skip-link {
-        position: absolute;
+        position: fixed;
         top: -5rem;
         left: 1rem;
-        z-index: 10;
-        padding: 0.6rem 0.85rem;
-        background: var(--text);
-        color: var(--background);
+        z-index: 100;
+        padding: 0.65rem 0.9rem;
+        color: var(--paper);
+        background: var(--ink);
+        font-weight: 700;
       }
 
       .skip-link:focus {
         top: 1rem;
       }
 
-      .shell {
-        width: min(calc(100% - 2.5rem), var(--content-width));
+      .wrap {
+        width: min(calc(100% - 3rem), var(--max-width));
         margin-inline: auto;
       }
 
-      header {
-        border-bottom: 1px solid var(--line);
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        border-bottom: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+        background: color-mix(in srgb, var(--paper) 88%, transparent);
+        backdrop-filter: blur(16px);
       }
 
-      nav {
-        min-height: 68px;
+      .nav {
+        min-height: 72px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .nav-links {
+        grid-column: 2;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 2rem;
-      }
-
-      .name {
-        font-size: 1rem;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-        text-decoration: none;
-      }
-
-      nav ul {
-        display: flex;
-        gap: 1.4rem;
         margin: 0;
         padding: 0;
         list-style: none;
-        font-size: 0.9rem;
-      }
-
-      main {
-        padding-bottom: 5rem;
-      }
-
-      section {
-        scroll-margin-top: 2rem;
-      }
-
-      .intro {
-        padding: 6.5rem 0 5.5rem;
-      }
-
-      .eyebrow,
-      .meta,
-      .stack {
-        font-family: "Courier New", Courier, monospace;
-        font-size: 0.78rem;
-        letter-spacing: 0.02em;
-      }
-
-      .eyebrow {
-        margin: 0 0 1.25rem;
-        color: var(--accent);
-      }
-
-      h1,
-      h2,
-      h3,
-      p {
-        margin-top: 0;
-      }
-
-      h1 {
-        max-width: 700px;
-        margin-bottom: 1.5rem;
-        font-size: clamp(2.35rem, 7vw, 4.1rem);
-        line-height: 1.05;
-        letter-spacing: -0.045em;
-        font-weight: 700;
-      }
-
-      .intro-copy {
-        max-width: 620px;
-        margin-bottom: 0;
-        color: var(--muted);
-        font-size: clamp(1.05rem, 2.2vw, 1.2rem);
-      }
-
-      .section-heading {
-        display: grid;
-        grid-template-columns: 8.5rem 1fr;
-        gap: 1.5rem;
-        padding: 1.25rem 0;
-        border-top: 1px solid var(--line);
-      }
-
-      h2 {
-        margin: 0;
-        font-size: 0.8rem;
-        line-height: 1.6;
+        font-size: 0.82rem;
+        font-weight: 650;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      .section-note {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.92rem;
+      .nav-links a {
+        position: relative;
+        text-decoration: none;
       }
 
-      .project {
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 100%;
+        bottom: -0.45rem;
+        height: 2px;
+        background: var(--accent);
+        transition: right 180ms ease;
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a[aria-current="true"]::after {
+        right: 0;
+      }
+
+      .theme-toggle {
+        grid-column: 3;
+        justify-self: end;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.45rem 0.65rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink);
+        background: var(--paper-raised);
+        font: 650 0.72rem/1 var(--mono);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .theme-dot {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      section {
+        scroll-margin-top: 6rem;
+      }
+
+      .hero {
+        min-height: calc(100svh - 72px);
         display: grid;
-        grid-template-columns: 8.5rem 1fr;
-        gap: 1.5rem;
-        padding: 2rem 0;
+        grid-template-columns: minmax(0, 1fr) 18rem;
+        align-items: end;
+        gap: clamp(3rem, 8vw, 8rem);
+        padding-block: clamp(5rem, 10vh, 8rem) 3.5rem;
+      }
+
+      .kicker,
+      .label,
+      .project-index,
+      .project-meta,
+      .detail-label,
+      .availability {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        line-height: 1.4;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .kicker {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0 0 1.5rem;
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .kicker::before {
+        content: "";
+        width: 2.5rem;
+        height: 1px;
+        background: currentColor;
+      }
+
+      .hero h1 {
+        max-width: 810px;
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(4.5rem, 11.5vw, 9.6rem);
+        font-weight: 400;
+        line-height: 0.82;
+        letter-spacing: -0.07em;
+      }
+
+      .hero h1 span {
+        display: block;
+        margin-left: clamp(1.5rem, 10vw, 8rem);
+        color: var(--accent);
+        font-style: italic;
+      }
+
+      .hero-copy {
+        max-width: 660px;
+        margin: 2.5rem 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      }
+
+      .hero-side {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        border-left: 1px solid var(--line);
+        padding-left: 1.5rem;
+      }
+
+      .status-block {
+        padding-block: 1.25rem;
         border-top: 1px solid var(--line);
       }
 
-      .project:last-child {
+      .status-block:last-child {
         border-bottom: 1px solid var(--line);
       }
 
-      .meta {
-        margin: 0;
+      .detail-label {
+        display: block;
+        margin-bottom: 0.45rem;
         color: var(--muted);
       }
 
-      .project-body h3 {
-        margin-bottom: 0.55rem;
-        font-size: 1.12rem;
+      .status-block strong {
+        display: block;
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 400;
         line-height: 1.35;
-        letter-spacing: -0.015em;
       }
 
-      .project-body p {
-        max-width: 580px;
-        margin-bottom: 0.75rem;
+      .scroll-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-top: 2.5rem;
+        font: 700 0.72rem/1 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+
+      .scroll-note::before {
+        content: "↓";
+        display: grid;
+        place-items: center;
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        color: var(--accent);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 9rem 1fr auto;
+        gap: 2rem;
+        align-items: baseline;
+        padding: 6rem 0 2rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .label {
+        margin: 0;
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(2.6rem, 5vw, 4.8rem);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.045em;
+      }
+
+      .section-count {
         color: var(--muted);
+        font: 0.75rem/1 var(--mono);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1rem;
+        padding-bottom: 7rem;
+      }
+
+      .project-card {
+        position: relative;
+        min-height: 30rem;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        background: var(--paper-raised);
+        transition:
+          transform 220ms ease,
+          border-color 220ms ease,
+          box-shadow 220ms ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-4px);
+        border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+        box-shadow: 0 20px 50px color-mix(in srgb, var(--ink) 11%, transparent);
+      }
+
+      .project-card.featured {
+        grid-column: span 12;
+        min-height: 36rem;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+
+      .project-card.half {
+        grid-column: span 6;
+      }
+
+      .project-card.third {
+        grid-column: span 4;
+        min-height: 27rem;
+      }
+
+      .project-copy {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: clamp(1.5rem, 3vw, 2.4rem);
+      }
+
+      .project-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+        color: var(--muted);
+      }
+
+      .project-index {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .project-card h3 {
+        max-width: 620px;
+        margin: 0 0 1rem;
+        font-family: var(--serif);
+        font-size: clamp(1.8rem, 3.4vw, 3.4rem);
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .project-card.third h3 {
+        font-size: clamp(1.65rem, 2.4vw, 2.3rem);
+      }
+
+      .project-description {
+        max-width: 650px;
+        margin: 0 0 1.5rem;
+        color: var(--muted);
+      }
+
+      .project-bottom {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-top: auto;
+        padding-top: 2rem;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tags li {
+        padding: 0.35rem 0.55rem;
+        border: 1px solid var(--soft-line);
+        border-radius: 999px;
+        color: var(--muted);
+        font: 0.68rem/1 var(--mono);
       }
 
       .project-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.45rem 1rem;
-        margin: 0;
-        font-size: 0.9rem;
+        justify-content: flex-end;
+        gap: 0.75rem 1rem;
+        font-size: 0.82rem;
+        font-weight: 700;
       }
 
       .project-links a::after,
@@ -228,94 +474,523 @@
         color: var(--accent);
       }
 
-      .stack {
-        margin-bottom: 0;
-        color: var(--accent);
+      .project-visual {
+        position: relative;
+        min-height: 18rem;
+        overflow: hidden;
+        border-left: 1px solid var(--line);
+        background: var(--dark-panel);
+        color: #f2f2eb;
       }
 
-      .about,
-      .contact {
+      .sim-visual {
         display: grid;
-        grid-template-columns: 8.5rem 1fr;
-        gap: 1.5rem;
-        padding: 4.5rem 0;
-        border-bottom: 1px solid var(--line);
+        place-items: center;
+        padding: 2rem;
       }
 
-      .about-copy p,
-      .contact-copy p {
-        max-width: 580px;
+      .field-map {
+        position: relative;
+        width: min(100%, 29rem);
+        aspect-ratio: 1 / 0.83;
+        border: 1px solid #444841;
+        background-image:
+          linear-gradient(#2a2d29 1px, transparent 1px),
+          linear-gradient(90deg, #2a2d29 1px, transparent 1px);
+        background-size: 28px 28px;
+      }
+
+      .field-map::before,
+      .field-map::after {
+        content: "";
+        position: absolute;
+        inset: 13% 9%;
+        border: 1px solid #70756c;
+        clip-path: polygon(8% 13%, 74% 0, 100% 23%, 91% 84%, 30% 100%, 0 72%);
+      }
+
+      .field-map::after {
+        inset: 24% 18%;
+        border-color: color-mix(in srgb, var(--accent) 80%, #fff);
+        clip-path: polygon(4% 18%, 88% 0, 100% 71%, 57% 100%, 0 79%);
+      }
+
+      .robot {
+        position: absolute;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        width: 2.1rem;
+        height: 2.1rem;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        background: var(--dark-panel);
+        font: 700 0.65rem/1 var(--mono);
+      }
+
+      .robot.langur { left: 25%; top: 31%; color: #f07555; }
+      .robot.howler { right: 26%; top: 46%; color: #74a9ff; }
+      .robot.mandril { left: 45%; bottom: 18%; color: #92c77f; }
+
+      .sim-readout {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 3;
+        padding: 0.75rem;
+        border: 1px solid #3c403a;
+        background: #141614;
+        color: #aeb3aa;
+        font: 0.65rem/1.55 var(--mono);
+      }
+
+      .visual-strip {
+        min-height: 13rem;
+        border-bottom: 1px solid var(--line);
+        background: var(--dark-panel);
+      }
+
+      .mix-visual {
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+      }
+
+      .layers {
+        width: min(100%, 25rem);
+        display: grid;
+        gap: 0.42rem;
+        transform: skewY(-7deg);
+      }
+
+      .layer {
+        height: 0.65rem;
+        border: 1px solid #4b4e48;
+        background: linear-gradient(90deg, #f07555 0 38%, #f5b45d 38% 62%, #6a82db 62%);
+      }
+
+      .layer:nth-child(even) {
+        margin-left: 1.6rem;
+        background: linear-gradient(90deg, #6a82db 0 26%, #f07555 26% 74%, #f5b45d 74%);
+      }
+
+      .telemetry-visual {
+        display: flex;
+        align-items: stretch;
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+
+      .node-diagram {
+        flex: 0 0 7rem;
+        display: grid;
+        place-items: center;
+        border: 1px solid #41453f;
+      }
+
+      .node-box {
+        position: relative;
+        width: 3rem;
+        height: 4.5rem;
+        border: 1px solid #f0eee8;
+      }
+
+      .node-box::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 100%;
+        width: 1px;
+        height: 2.5rem;
+        background: #f0eee8;
+      }
+
+      .telemetry-log {
+        flex: 1;
+        margin: 0;
+        color: #aeb3aa;
+        font: 0.65rem/1.65 var(--mono);
+        white-space: pre-wrap;
+      }
+
+      .drone-visual {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+      }
+
+      .mission-step {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 13rem;
+        padding: 1rem;
+        border-right: 1px solid #383b36;
+      }
+
+      .mission-step:last-child { border-right: 0; }
+      .mission-step span { color: #777c73; font: 0.62rem/1 var(--mono); }
+      .mission-step strong { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; }
+      .mission-step.active { color: #fff; background: color-mix(in srgb, var(--accent) 76%, #171917); }
+
+      .cards-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 2rem;
+      }
+
+      .playing-card {
+        width: 4.2rem;
+        height: 6rem;
+        display: grid;
+        place-items: center;
+        border: 1px solid #5c6058;
+        border-radius: 0.35rem;
+        background: #242724;
+        font: 700 0.72rem/1 var(--mono);
+        transform: rotate(var(--r));
+      }
+
+      .playing-card:nth-child(2) { color: #f5b45d; }
+      .playing-card:nth-child(3) { color: #74a9ff; }
+      .playing-card:nth-child(4) { color: #92c77f; }
+
+      .terminal-visual {
+        padding: 1.4rem;
+      }
+
+      .terminal-bar {
+        display: flex;
+        gap: 0.35rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .terminal-bar i {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: #5c6058;
+      }
+
+      .terminal-text {
+        margin: 0;
+        color: #b7bcb3;
+        font: 0.65rem/1.65 var(--mono);
+        white-space: pre-wrap;
+      }
+
+      .phone-visual {
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+      }
+
+      .phone {
+        position: relative;
+        width: 5.2rem;
+        height: 9rem;
+        border: 1px solid #d8dbd4;
+        border-radius: 0.8rem;
+      }
+
+      .phone::before {
+        content: "armbian@phone:~$\A uptime\A 12 days, 04:17";
+        position: absolute;
+        inset: 0.85rem 0.55rem;
+        color: #92c77f;
+        font: 0.5rem/1.55 var(--mono);
+        white-space: pre;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(3rem, 8vw, 8rem);
+        padding: 2rem 0 7rem;
+      }
+
+      .about-lead {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(2rem, 4vw, 3.8rem);
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+      }
+
+      .about-copy p {
+        margin: 0 0 1.2rem;
         color: var(--muted);
       }
 
-      .about-copy p:last-child,
-      .contact-copy p:last-child {
-        margin-bottom: 0;
+      .skill-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+        margin-top: 2.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .skill-list div {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .skill-list div:nth-child(odd) {
+        padding-right: 1rem;
+      }
+
+      .skill-list div:nth-child(even) {
+        padding-left: 1rem;
+        border-left: 1px solid var(--line);
+      }
+
+      .skill-list dt {
+        margin-bottom: 0.25rem;
+        color: var(--accent);
+        font: 700 0.68rem/1.4 var(--mono);
+        text-transform: uppercase;
+      }
+
+      .skill-list dd {
+        margin: 0;
+        font-size: 0.88rem;
+      }
+
+      .contact-band {
+        color: #f0eee8;
+        background: var(--dark-panel);
+      }
+
+      .contact-inner {
+        min-height: 33rem;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 4rem;
+        padding-block: 6rem;
+      }
+
+      .contact-band .label {
+        margin-bottom: 1.5rem;
+        color: #f07555;
+      }
+
+      .contact-band h2 {
+        max-width: 750px;
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(3.2rem, 7vw, 6.8rem);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.055em;
+      }
+
+      .contact-band h2 em {
+        color: #f07555;
+        font-weight: 400;
       }
 
       .contact-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.65rem 1.25rem;
-        margin-top: 1.25rem;
+        display: grid;
+        gap: 1rem;
+        justify-items: start;
       }
 
-      @media (max-width: 620px) {
-        .shell {
-          width: min(calc(100% - 2rem), var(--content-width));
-        }
+      .contact-links a {
+        color: #f0eee8;
+        font-weight: 700;
+      }
 
-        nav {
-          min-height: 60px;
-        }
+      .contact-links a:hover {
+        color: #f07555;
+      }
 
-        nav ul {
-          gap: 0.9rem;
-          font-size: 0.82rem;
-        }
+      .availability {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 2rem;
+        color: var(--dark-muted);
+      }
 
-        .intro {
-          padding: 4.5rem 0 4rem;
-        }
+      .availability::before {
+        content: "";
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: #92c77f;
+        box-shadow: 0 0 0 4px #293429;
+      }
 
-        .section-heading,
-        .project,
-        .about,
-        .contact {
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 900px) {
+        .hero {
           grid-template-columns: 1fr;
-          gap: 0.7rem;
+          min-height: auto;
+          align-items: start;
         }
 
-        .section-heading {
-          padding: 1rem 0;
+        .hero-side {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          border-left: 0;
+          border-top: 1px solid var(--line);
+          padding-left: 0;
         }
 
-        .project {
-          padding: 1.65rem 0;
+        .status-block {
+          padding: 1rem;
+          border-top: 0;
+          border-right: 1px solid var(--line);
         }
 
-        .about,
-        .contact {
-          padding: 3.5rem 0;
+        .status-block:last-child {
+          border-right: 0;
+          border-bottom: 0;
         }
 
+        .project-card.featured {
+          grid-template-columns: 1fr;
+        }
+
+        .project-card.featured .project-visual {
+          border-left: 0;
+          border-top: 1px solid var(--line);
+        }
+
+        .project-card.third {
+          grid-column: span 6;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .wrap {
+          width: min(calc(100% - 2rem), var(--max-width));
+        }
+
+        .nav {
+          min-height: 64px;
+          grid-template-columns: 1fr auto;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 5rem;
+        }
+
+        .hero h1 {
+          font-size: clamp(4rem, 25vw, 6rem);
+        }
+
+        .hero h1 span {
+          margin-left: 1rem;
+        }
+
+        .hero-side {
+          grid-template-columns: 1fr;
+        }
+
+        .status-block {
+          padding-inline: 0;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .section-head {
+          grid-template-columns: 1fr auto;
+          gap: 0.75rem;
+          padding-top: 4.5rem;
+        }
+
+        .section-head h2 {
+          grid-column: 1 / -1;
+          grid-row: 2;
+        }
+
+        .project-card.half,
+        .project-card.third {
+          grid-column: span 12;
+        }
+
+        .project-card {
+          min-height: 0;
+        }
+
+        .project-bottom {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .project-links {
+          justify-content: flex-start;
+        }
+
+        .drone-visual {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .mission-step:nth-child(2) {
+          border-right: 0;
+        }
+
+        .mission-step:nth-child(-n + 2) {
+          border-bottom: 1px solid #383b36;
+        }
+
+        .skill-list {
+          grid-template-columns: 1fr;
+        }
+
+        .skill-list div:nth-child(odd),
+        .skill-list div:nth-child(even) {
+          padding-inline: 0;
+          border-left: 0;
+        }
+
+        .contact-inner {
+          grid-template-columns: 1fr;
+          min-height: 0;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
         }
-      }
 
-      @media (prefers-color-scheme: dark) {
-        :root {
-          color-scheme: dark;
-          --background: #181a18;
-          --surface: #20231f;
-          --text: #ecece5;
-          --muted: #acaea5;
-          --line: #373a35;
-          --accent: #82b8a4;
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
         }
       }
     </style>
@@ -323,153 +998,289 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header>
-      <nav class="shell" aria-label="Main navigation">
-        <a class="name" href="#top">Shazin</a>
-        <ul>
-          <li><a href="#work">Work</a></li>
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span class="theme-dot" aria-hidden="true"></span>
+          <span class="theme-text">Dark</span>
+        </button>
       </nav>
     </header>
 
     <main id="main">
-      <section class="intro shell" id="top" aria-labelledby="intro-title">
-        <p class="eyebrow">Computer engineering student</p>
-        <h1 id="intro-title">Hi, I'm Shazin.</h1>
-        <p class="intro-copy">
-          I'm in my final year at APU. I work on embedded systems, software and whatever else catches my interest —
-          lately that has meant satellite sensor nodes, autonomous drones, robot simulations and open-source slicers.
-        </p>
-      </section>
-
-      <section class="shell" id="work" aria-labelledby="work-title">
-        <div class="section-heading">
-          <h2 id="work-title">Projects</h2>
-          <p class="section-note">A mix of university, open-source and independent projects.</p>
+      <section class="hero wrap" id="top" aria-labelledby="hero-title">
+        <div class="hero-main reveal">
+          <p class="kicker">Computer engineering student</p>
+          <h1 id="hero-title">Hi, I'm <span>Shazin.</span></h1>
+          <p class="hero-copy">
+            I'm in my final year at APU. I work on embedded systems, software and whatever else catches my interest —
+            lately that has meant satellite field nodes, autonomous drones, robot simulations and open-source slicers.
+          </p>
+          <a class="scroll-note" href="#projects">See projects</a>
         </div>
 
-        <article class="project">
-          <p class="meta">2026 / ongoing</p>
-          <div class="project-body">
-            <h3>Agricultural robot fleet simulator</h3>
-            <p>
-              A discrete-event simulation for studying fleet size, robot ratios and charging-station capacity in
-              heterogeneous oil-palm harvesting fleets. It models three robot roles, task allocation, batteries,
-              drainage-aware routing and repeatable parameter sweeps.
-            </p>
-            <p class="stack">Python · SimPy · FastAPI · React · TypeScript · SQLite</p>
+        <aside class="hero-side reveal" aria-label="Current information">
+          <div class="status-block">
+            <span class="detail-label">Working on</span>
+            <strong>Building an agricultural robot fleet simulator</strong>
           </div>
-        </article>
-
-        <article class="project">
-          <p class="meta">2025–2026</p>
-          <div class="project-body">
-            <h3>Full-spectrum colour mixing for OrcaSlicer</h3>
-            <p>
-              Contributed mixed-filament colour mixing and Local-Z dithering to a collaborative OrcaSlicer fork.
-              Snapmaker later merged the co-authored work into its official Snapmaker Orca slicer, and the upstream
-              OrcaSlicer integration credits the contribution.
-            </p>
-            <p class="project-links">
-              <a href="https://github.com/Snapmaker/OrcaSlicer/pull/409">Snapmaker merge</a>
-              <a href="https://github.com/OrcaSlicer/OrcaSlicer/pull/13437">Upstream integration</a>
-            </p>
+          <div class="status-block">
+            <span class="detail-label">Based in</span>
+            <strong>Malaysia</strong>
           </div>
-        </article>
-
-        <article class="project">
-          <p class="meta">2025</p>
-          <div class="project-body">
-            <h3>Satellite-connected field monitoring nodes</h3>
-            <p>
-              Developed firmware for custom STM32U0 ground nodes that read field sensors over Modbus/RS-485 and
-              transmit compact telemetry through Iridium SBD. The firmware handles low-power shutdown, sensor
-              detection, local storage and retransmission after connectivity failures.
-            </p>
-            <p class="stack">C++ · STM32U0 · Modbus · RS-485 · Iridium SBD · FRAM</p>
+          <div class="status-block">
+            <span class="detail-label">Studying</span>
+            <strong>Computer Engineering, final year at APU</strong>
           </div>
-        </article>
-
-        <article class="project">
-          <p class="meta">2026</p>
-          <div class="project-body">
-            <h3>Huginn autonomous payload drone</h3>
-            <p>
-              Built the Raspberry Pi telemetry backend, WebSocket server and browser dashboard for a four-person
-              autonomous drone project. I also worked on MAVLink integration, RealSense support and safe flight-test
-              procedures covering failsafes, manual override and loss-of-control response.
-            </p>
-            <p class="stack">Python · MAVLink · WebSockets · Raspberry Pi · HTML/CSS/JS</p>
-          </div>
-        </article>
-
-        <article class="project">
-          <p class="meta">2026</p>
-          <div class="project-body">
-            <h3>Lifestitchr Atlas</h3>
-            <p>
-              A responsive deckbuilder for an original card game, with search and filtering, deck rules, starter
-              decks, card previews, shareable URL state and an automated card-atlas generation workflow.
-            </p>
-            <p class="project-links">
-              <a href="https://atlas.shazin.dev/">Live site</a>
-              <a href="https://github.com/xSil3nt/atlas">Source</a>
-            </p>
-          </div>
-        </article>
-
-        <article class="project">
-          <p class="meta">2020</p>
-          <div class="project-body">
-            <h3>BlissROM for the Samsung Galaxy Note 5</h3>
-            <p>
-              Built and maintained an official Android 10 ROM for several Galaxy Note 5 variants, working with
-              device trees, kernel and vendor sources, release builds, updates and community support. The releases
-              passed 10,000 downloads on XDA Developers.
-            </p>
-            <p class="project-links">
-              <a href="https://xdaforums.com/t/rom-10-0-official-eol-blissrom-12-12-for-noblelte-n920c-i-g-t-w8-8-cd.4130613/">XDA release</a>
-            </p>
-          </div>
-        </article>
-
-        <article class="project">
-          <p class="meta">2025</p>
-          <div class="project-body">
-            <h3>Armbian ports for Android phones</h3>
-            <p>
-              Ported Armbian to several Android phones to explore them as inexpensive home servers and Raspberry Pi
-              alternatives, with their batteries acting as built-in UPS units and USB breakouts providing GPIO/UART
-              access.
-            </p>
-            <p class="stack">Linux · ARM · device trees · boot tooling</p>
-          </div>
-        </article>
+        </aside>
       </section>
 
-      <section class="about shell" id="about" aria-labelledby="about-title">
-        <h2 id="about-title">About</h2>
-        <div class="about-copy">
-          <p>
-            I'm finishing a B.Eng. in Computer Engineering at Asia Pacific University, with a current CGPA of
-            3.63/4.00 and two Vice-Chancellor's List awards. I enjoy projects where I have to understand a system from
-            the bottom up rather than stay inside one layer of the stack.
-          </p>
-          <p>
-            I use Arch Linux as my main desktop OS and work mostly with C/C++, Python, TypeScript and Git.
-            Current interests include low-power embedded systems, autonomous robots, simulation and practical uses
-            for overlooked hardware.
-          </p>
+      <section class="wrap" id="projects" aria-labelledby="projects-title">
+        <div class="section-head reveal">
+          <p class="label">01 / Projects</p>
+          <h2 id="projects-title">Things I've worked on.</h2>
+          <span class="section-count">07 projects</span>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card featured reveal">
+            <div class="project-copy">
+              <div class="project-topline">
+                <span class="project-index">P.01</span>
+                <span class="project-meta">2026 · Ongoing</span>
+              </div>
+              <h3>Agricultural robot fleet simulator</h3>
+              <p class="project-description">
+                My final-year project: a discrete-event simulation for testing fleet size, robot ratios and
+                charging-station capacity in heterogeneous oil-palm harvesting fleets. It models three robot roles,
+                task allocation, battery constraints, drainage-aware routing and parameter sweeps.
+              </p>
+              <div class="project-bottom">
+                <ul class="tags" aria-label="Technologies">
+                  <li>Python</li>
+                  <li>SimPy</li>
+                  <li>FastAPI</li>
+                  <li>React</li>
+                  <li>TypeScript</li>
+                  <li>SQLite</li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-visual sim-visual" aria-hidden="true">
+              <div class="field-map">
+                <span class="robot langur">L</span>
+                <span class="robot howler">H</span>
+                <span class="robot mandril">M</span>
+              </div>
+              <div class="sim-readout">fleet 04 / 04 / 08<br />stations 03<br />completion 78.4%</div>
+            </div>
+          </article>
+
+          <article class="project-card half reveal">
+            <div class="visual-strip mix-visual" aria-hidden="true">
+              <div class="layers">
+                <span class="layer"></span><span class="layer"></span><span class="layer"></span>
+                <span class="layer"></span><span class="layer"></span><span class="layer"></span>
+              </div>
+            </div>
+            <div class="project-copy">
+              <div class="project-topline">
+                <span class="project-index">P.02</span>
+                <span class="project-meta">2025–2026</span>
+              </div>
+              <h3>Full-spectrum colour mixing for OrcaSlicer</h3>
+              <p class="project-description">
+                Contributed mixed-filament colour mixing and Local-Z dithering to an OrcaSlicer fork. Snapmaker
+                merged the co-authored work into its official slicer, with credit also carried into the upstream
+                OrcaSlicer integration.
+              </p>
+              <div class="project-bottom">
+                <ul class="tags" aria-label="Technologies"><li>C++</li><li>Git</li><li>3D printing</li></ul>
+                <div class="project-links">
+                  <a href="https://github.com/Snapmaker/OrcaSlicer/pull/409">Snapmaker</a>
+                  <a href="https://github.com/OrcaSlicer/OrcaSlicer/pull/13437">Upstream</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card half reveal">
+            <div class="visual-strip telemetry-visual" aria-hidden="true">
+              <div class="node-diagram"><span class="node-box"></span></div>
+              <pre class="telemetry-log">[NODE] sensor detected
+[RS485] reading registers
+[STORE] queue: 03 records
+[SBD] uplink accepted
+[POWER] entering shutdown</pre>
+            </div>
+            <div class="project-copy">
+              <div class="project-topline">
+                <span class="project-index">P.03</span>
+                <span class="project-meta">2025</span>
+              </div>
+              <h3>Satellite-connected field monitoring nodes</h3>
+              <p class="project-description">
+                Developed firmware for custom STM32U0 ground nodes that read field sensors over Modbus/RS-485 and
+                transmit compact telemetry through Iridium SBD, with low-power shutdown, storage and retransmission
+                after connectivity failures.
+              </p>
+              <div class="project-bottom">
+                <ul class="tags" aria-label="Technologies"><li>C++</li><li>STM32U0</li><li>Iridium SBD</li><li>FRAM</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card half reveal">
+            <div class="visual-strip drone-visual" aria-hidden="true">
+              <div class="mission-step"><span>01</span><strong>Navigate</strong></div>
+              <div class="mission-step"><span>02</span><strong>Centre</strong></div>
+              <div class="mission-step active"><span>03</span><strong>Deploy</strong></div>
+              <div class="mission-step"><span>04</span><strong>Return</strong></div>
+            </div>
+            <div class="project-copy">
+              <div class="project-topline">
+                <span class="project-index">P.04</span>
+                <span class="project-meta">2026</span>
+              </div>
+              <h3>Huginn autonomous payload drone</h3>
+              <p class="project-description">
+                Built the Raspberry Pi telemetry backend, WebSocket server and browser dashboard for a four-person
+                autonomous drone project. I also worked on MAVLink integration, RealSense support and safe flight-test
+                procedures covering failsafes, manual override and loss-of-control response.
+              </p>
+              <div class="project-bottom">
+                <ul class="tags" aria-label="Technologies"><li>Python</li><li>MAVLink</li><li>WebSockets</li><li>Raspberry Pi</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card half reveal">
+            <div class="visual-strip cards-visual" aria-hidden="true">
+              <span class="playing-card" style="--r: -8deg">Heart</span>
+              <span class="playing-card" style="--r: -3deg">Brain</span>
+              <span class="playing-card" style="--r: 3deg">Soul</span>
+              <span class="playing-card" style="--r: 8deg">Eye</span>
+            </div>
+            <div class="project-copy">
+              <div class="project-topline">
+                <span class="project-index">P.05</span>
+                <span class="project-meta">2026</span>
+              </div>
+              <h3>Lifestitchr Atlas</h3>
+              <p class="project-description">
+                A responsive deckbuilder for an original card game, with search, filtering, deck rules, card previews,
+                shareable URL state and an automated card-atlas generation workflow.
+              </p>
+              <div class="project-bottom">
+                <ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>Python</li><li>CSS</li></ul>
+                <div class="project-links">
+                  <a href="https://atlas.shazin.dev/">Live</a>
+                  <a href="https://github.com/xSil3nt/atlas">Source</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card third reveal">
+            <div class="visual-strip terminal-visual" aria-hidden="true">
+              <div class="terminal-bar"><i></i><i></i><i></i></div>
+              <pre class="terminal-text">$ lunch bliss_noblelte-userdebug
+$ mka bacon
+[100%] Package complete
+bliss_noblelte-12.12.zip</pre>
+            </div>
+            <div class="project-copy">
+              <div class="project-topline"><span class="project-index">P.06</span><span class="project-meta">2020</span></div>
+              <h3>BlissROM for the Galaxy Note 5</h3>
+              <p class="project-description">
+                Built and maintained an official Android 10 ROM for several Note 5 variants. The releases passed
+                10,000 downloads on XDA Developers.
+              </p>
+              <div class="project-bottom">
+                <ul class="tags" aria-label="Technologies"><li>Android</li><li>Linux</li><li>Kernel</li></ul>
+                <div class="project-links">
+                  <a href="https://xdaforums.com/t/rom-10-0-official-eol-blissrom-12-12-for-noblelte-n920c-i-g-t-w8-8-cd.4130613/">XDA</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card third reveal">
+            <div class="visual-strip phone-visual" aria-hidden="true"><span class="phone"></span></div>
+            <div class="project-copy">
+              <div class="project-topline"><span class="project-index">P.07</span><span class="project-meta">2025</span></div>
+              <h3>Armbian ports for Android phones</h3>
+              <p class="project-description">
+                Ported Armbian to several Android phones to test them as inexpensive home servers and Raspberry Pi
+                alternatives, using the battery as a built-in UPS.
+              </p>
+              <div class="project-bottom">
+                <ul class="tags" aria-label="Technologies"><li>Linux</li><li>ARM</li><li>Device trees</li></ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card third reveal">
+            <div class="visual-strip telemetry-visual" aria-hidden="true">
+              <pre class="telemetry-log">other things I've built
+
+• BJT amplifier circuits
+• FPGA components in VHDL
+• ESP32 infotainment prototype
+• YOLO plant-disease model</pre>
+            </div>
+            <div class="project-copy">
+              <div class="project-topline"><span class="project-index">+</span><span class="project-meta">Selected coursework</span></div>
+              <h3>Smaller experiments</h3>
+              <p class="project-description">
+                Circuit, FPGA, embedded and computer-vision projects from across the degree.
+              </p>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section class="contact shell" id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <div class="contact-copy">
-          <p>If you'd like to talk about a project, research or open-source work, email is the best way to reach me.</p>
-          <div class="contact-links">
+      <section class="wrap" id="about" aria-labelledby="about-title">
+        <div class="section-head reveal">
+          <p class="label">02 / About</p>
+          <h2 id="about-title">A bit about me.</h2>
+        </div>
+        <div class="about-grid">
+          <p class="about-lead reveal">
+            I enjoy figuring out how a system works from the bottom up, especially when hardware and software meet.
+          </p>
+          <div class="about-copy reveal">
+            <p>
+              I'm finishing a B.Eng. in Computer Engineering at Asia Pacific University, with a current CGPA of
+              3.63/4.00 and two Vice-Chancellor's List awards.
+            </p>
+            <p>
+              I use Arch Linux as my main desktop OS. Most of my work is in C/C++, Python, TypeScript and Git, but I'm
+              comfortable moving into whatever part of a project needs attention.
+            </p>
+            <dl class="skill-list">
+              <div><dt>Programming</dt><dd>C/C++, Python, TypeScript, VHDL</dd></div>
+              <div><dt>Embedded</dt><dd>STM32, ESP32, UART, I²C, RS-485</dd></div>
+              <div><dt>Systems</dt><dd>Linux, Git, Docker, networking</dd></div>
+              <div><dt>Tools</dt><dd>LTspice, Quartus, Fusion, OrcaSlicer</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-band" id="contact" aria-labelledby="contact-title">
+        <div class="contact-inner wrap">
+          <div class="reveal">
+            <p class="label">03 / Contact</p>
+            <h2 id="contact-title">Want to talk about a <em>project?</em></h2>
+            <p class="availability">Email is the best way to reach me</p>
+          </div>
+          <div class="contact-links reveal">
             <a href="mailto:ahmedshazin21@gmail.com">Email</a>
             <a href="https://github.com/xSil3nt">GitHub</a>
           </div>
@@ -477,5 +1288,66 @@
       </section>
     </main>
 
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const toggle = document.querySelector(".theme-toggle");
+        const toggleText = document.querySelector(".theme-text");
+        const storedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        const setTheme = (theme) => {
+          root.dataset.theme = theme;
+          toggleText.textContent = theme === "dark" ? "Light" : "Dark";
+          document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#151715" : "#f0eee8";
+        };
+
+        setTheme(storedTheme || (prefersDark ? "dark" : "light"));
+
+        toggle.addEventListener("click", () => {
+          const next = root.dataset.theme === "dark" ? "light" : "dark";
+          localStorage.setItem("theme", next);
+          setTheme(next);
+        });
+
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const revealItems = document.querySelectorAll(".reveal");
+
+        if (reducedMotion || !("IntersectionObserver" in window)) {
+          revealItems.forEach((item) => item.classList.add("is-visible"));
+        } else {
+          const revealObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.12 }
+          );
+          revealItems.forEach((item) => revealObserver.observe(item));
+        }
+
+        const navLinks = [...document.querySelectorAll(".nav-links a")];
+        const sections = navLinks.map((link) => document.querySelector(link.hash)).filter(Boolean);
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            const current = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (!current) return;
+            navLinks.forEach((link) => {
+              const active = link.hash === `#${current.target.id}`;
+              if (active) link.setAttribute("aria-current", "true");
+              else link.removeAttribute("aria-current");
+            });
+          },
+          { rootMargin: "-20% 0px -65%", threshold: [0, 0.25, 0.6] }
+        );
+        sections.forEach((section) => navObserver.observe(section));
+      })();
+    </script>
   </body>
 </html>
