@@ -3,120 +3,479 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Shazin — Portfolio</title>
+    <meta
+      name="description"
+      content="Shazin is a computer engineering student working across embedded systems, robotics, simulation and open-source software."
+    />
+    <meta name="theme-color" content="#f6f5f0" />
+    <meta property="og:title" content="Shazin" />
+    <meta
+      property="og:description"
+      content="Computer engineering, embedded systems, simulation and open-source software."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shazin.dev/" />
+    <link rel="canonical" href="https://shazin.dev/" />
+    <title>Shazin</title>
     <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        color-scheme: light;
+        --background: #f6f5f0;
+        --surface: #eeece5;
+        --text: #20211f;
+        --muted: #62645e;
+        --line: #d6d3ca;
+        --accent: #265f4d;
+        --content-width: 760px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
 
       body {
-        font-family: system-ui, sans-serif;
-        color: #1a1a1a;
-        background: #fff;
+        margin: 0;
+        color: var(--text);
+        background: var(--background);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
         line-height: 1.6;
+        text-rendering: optimizeLegibility;
       }
 
-      a { color: inherit; text-decoration: none; }
+      a {
+        color: inherit;
+        text-decoration-color: var(--line);
+        text-underline-offset: 0.2em;
+        text-decoration-thickness: 1px;
+      }
 
-      /* Nav */
+      a:hover {
+        color: var(--accent);
+        text-decoration-color: currentColor;
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        border-radius: 2px;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -5rem;
+        left: 1rem;
+        z-index: 10;
+        padding: 0.6rem 0.85rem;
+        background: var(--text);
+        color: var(--background);
+      }
+
+      .skip-link:focus {
+        top: 1rem;
+      }
+
+      .shell {
+        width: min(calc(100% - 2.5rem), var(--content-width));
+        margin-inline: auto;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+      }
+
       nav {
+        min-height: 68px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 1.25rem 2rem;
-        border-bottom: 1px solid #e5e5e5;
+        justify-content: space-between;
+        gap: 2rem;
       }
-      nav .logo { font-weight: 700; font-size: 1.1rem; }
-      nav ul { list-style: none; display: flex; gap: 2rem; }
-      nav ul a:hover { text-decoration: underline; }
 
-      /* Sections */
-      section { padding: 5rem 2rem; max-width: 800px; margin: 0 auto; }
+      .name {
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+      }
 
-      /* Hero */
-      #hero { padding-top: 6rem; }
-      #hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-      #hero p { font-size: 1.15rem; color: #555; }
+      nav ul {
+        display: flex;
+        gap: 1.4rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 0.9rem;
+      }
 
-      /* About */
-      #about h2 { font-size: 1.6rem; margin-bottom: 1rem; }
-      #about p { color: #444; }
+      main {
+        padding-bottom: 5rem;
+      }
 
-      /* Projects */
-      #projects h2 { font-size: 1.6rem; margin-bottom: 1.5rem; }
-      .projects-grid {
+      section {
+        scroll-margin-top: 2rem;
+      }
+
+      .intro {
+        padding: 6.5rem 0 5.5rem;
+      }
+
+      .eyebrow,
+      .meta,
+      .stack {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.02em;
+      }
+
+      .eyebrow {
+        margin: 0 0 1.25rem;
+        color: var(--accent);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 700px;
+        margin-bottom: 1.5rem;
+        font-size: clamp(2.35rem, 7vw, 4.1rem);
+        line-height: 1.05;
+        letter-spacing: -0.045em;
+        font-weight: 700;
+      }
+
+      .intro-copy {
+        max-width: 620px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+      }
+
+      .section-heading {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 1.25rem;
+        grid-template-columns: 8.5rem 1fr;
+        gap: 1.5rem;
+        padding: 1.25rem 0;
+        border-top: 1px solid var(--line);
       }
-      .card {
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        padding: 1.25rem;
+
+      h2 {
+        margin: 0;
+        font-size: 0.8rem;
+        line-height: 1.6;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
-      .card h3 { margin-bottom: 0.5rem; }
-      .card p { font-size: 0.9rem; color: #555; }
 
-      /* Contact */
-      #contact h2 { font-size: 1.6rem; margin-bottom: 1rem; }
-      #contact p { color: #444; }
-      #contact a { text-decoration: underline; }
+      .section-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
 
-      /* Footer */
-      footer {
-        text-align: center;
-        padding: 2rem;
-        border-top: 1px solid #e5e5e5;
-        font-size: 0.85rem;
-        color: #888;
+      .project {
+        display: grid;
+        grid-template-columns: 8.5rem 1fr;
+        gap: 1.5rem;
+        padding: 2rem 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .project:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .meta {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .project-body h3 {
+        margin-bottom: 0.55rem;
+        font-size: 1.12rem;
+        line-height: 1.35;
+        letter-spacing: -0.015em;
+      }
+
+      .project-body p {
+        max-width: 580px;
+        margin-bottom: 0.75rem;
+        color: var(--muted);
+      }
+
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem 1rem;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .project-links a::after,
+      .contact-links a::after {
+        content: " ↗";
+        color: var(--accent);
+      }
+
+      .stack {
+        margin-bottom: 0;
+        color: var(--accent);
+      }
+
+      .about,
+      .contact {
+        display: grid;
+        grid-template-columns: 8.5rem 1fr;
+        gap: 1.5rem;
+        padding: 4.5rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .about-copy p,
+      .contact-copy p {
+        max-width: 580px;
+        color: var(--muted);
+      }
+
+      .about-copy p:last-child,
+      .contact-copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem 1.25rem;
+        margin-top: 1.25rem;
+      }
+
+      @media (max-width: 620px) {
+        .shell {
+          width: min(calc(100% - 2rem), var(--content-width));
+        }
+
+        nav {
+          min-height: 60px;
+        }
+
+        nav ul {
+          gap: 0.9rem;
+          font-size: 0.82rem;
+        }
+
+        .intro {
+          padding: 4.5rem 0 4rem;
+        }
+
+        .section-heading,
+        .project,
+        .about,
+        .contact {
+          grid-template-columns: 1fr;
+          gap: 0.7rem;
+        }
+
+        .section-heading {
+          padding: 1rem 0;
+        }
+
+        .project {
+          padding: 1.65rem 0;
+        }
+
+        .about,
+        .contact {
+          padding: 3.5rem 0;
+        }
+
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --background: #181a18;
+          --surface: #20231f;
+          --text: #ecece5;
+          --muted: #acaea5;
+          --line: #373a35;
+          --accent: #82b8a4;
+        }
       }
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav>
-      <span class="logo">Shazin</span>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <header>
+      <nav class="shell" aria-label="Main navigation">
+        <a class="name" href="#top">Shazin</a>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <section id="hero">
-      <h1>Hi, I'm Shazin.</h1>
-      <p>Developer · Builder · [Your tagline here]</p>
-    </section>
+    <main id="main">
+      <section class="intro shell" id="top" aria-labelledby="intro-title">
+        <p class="eyebrow">Computer engineering student</p>
+        <h1 id="intro-title">Hi, I'm Shazin.</h1>
+        <p class="intro-copy">
+          I'm in my final year at APU. I work on embedded systems, software and whatever else catches my interest —
+          lately that has meant satellite sensor nodes, autonomous drones, robot simulations and open-source slicers.
+        </p>
+      </section>
 
-    <section id="about">
-      <h2>About</h2>
-      <p>Short bio about who you are, what you do, and what you care about.</p>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="projects-grid">
-        <div class="card">
-          <h3>Project One</h3>
-          <p>Brief description of what this project does.</p>
+      <section class="shell" id="work" aria-labelledby="work-title">
+        <div class="section-heading">
+          <h2 id="work-title">Projects</h2>
+          <p class="section-note">A mix of university, open-source and independent projects.</p>
         </div>
-        <div class="card">
-          <h3>Project Two</h3>
-          <p>Brief description of what this project does.</p>
-        </div>
-        <div class="card">
-          <h3>Project Three</h3>
-          <p>Brief description of what this project does.</p>
-        </div>
-      </div>
-    </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Reach me at <a href="mailto:ahmedshazin21@gmail.com">ahmedshazin21@gmail.com</a></p>
-    </section>
+        <article class="project">
+          <p class="meta">2026 / ongoing</p>
+          <div class="project-body">
+            <h3>Agricultural robot fleet simulator</h3>
+            <p>
+              A discrete-event simulation for studying fleet size, robot ratios and charging-station capacity in
+              heterogeneous oil-palm harvesting fleets. It models three robot roles, task allocation, batteries,
+              drainage-aware routing and repeatable parameter sweeps.
+            </p>
+            <p class="stack">Python · SimPy · FastAPI · React · TypeScript · SQLite</p>
+          </div>
+        </article>
 
-    <footer>
-      <p>&copy; 2026 Shazin</p>
-    </footer>
+        <article class="project">
+          <p class="meta">2025–2026</p>
+          <div class="project-body">
+            <h3>Full-spectrum colour mixing for OrcaSlicer</h3>
+            <p>
+              Contributed mixed-filament colour mixing and Local-Z dithering to a collaborative OrcaSlicer fork.
+              Snapmaker later merged the co-authored work into its official Snapmaker Orca slicer, and the upstream
+              OrcaSlicer integration credits the contribution.
+            </p>
+            <p class="project-links">
+              <a href="https://github.com/Snapmaker/OrcaSlicer/pull/409">Snapmaker merge</a>
+              <a href="https://github.com/OrcaSlicer/OrcaSlicer/pull/13437">Upstream integration</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <p class="meta">2025</p>
+          <div class="project-body">
+            <h3>Satellite-connected field monitoring nodes</h3>
+            <p>
+              Developed firmware for custom STM32U0 ground nodes that read field sensors over Modbus/RS-485 and
+              transmit compact telemetry through Iridium SBD. The firmware handles low-power shutdown, sensor
+              detection, local storage and retransmission after connectivity failures.
+            </p>
+            <p class="stack">C++ · STM32U0 · Modbus · RS-485 · Iridium SBD · FRAM</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <p class="meta">2026</p>
+          <div class="project-body">
+            <h3>Huginn autonomous payload drone</h3>
+            <p>
+              Built the Raspberry Pi telemetry backend, WebSocket server and browser dashboard for a four-person
+              autonomous drone project. I also worked on MAVLink integration, RealSense support and safe flight-test
+              procedures covering failsafes, manual override and loss-of-control response.
+            </p>
+            <p class="stack">Python · MAVLink · WebSockets · Raspberry Pi · HTML/CSS/JS</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <p class="meta">2026</p>
+          <div class="project-body">
+            <h3>Lifestitchr Atlas</h3>
+            <p>
+              A responsive deckbuilder for an original card game, with search and filtering, deck rules, starter
+              decks, card previews, shareable URL state and an automated card-atlas generation workflow.
+            </p>
+            <p class="project-links">
+              <a href="https://atlas.shazin.dev/">Live site</a>
+              <a href="https://github.com/xSil3nt/atlas">Source</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <p class="meta">2020</p>
+          <div class="project-body">
+            <h3>BlissROM for the Samsung Galaxy Note 5</h3>
+            <p>
+              Built and maintained an official Android 10 ROM for several Galaxy Note 5 variants, working with
+              device trees, kernel and vendor sources, release builds, updates and community support. The releases
+              passed 10,000 downloads on XDA Developers.
+            </p>
+            <p class="project-links">
+              <a href="https://xdaforums.com/t/rom-10-0-official-eol-blissrom-12-12-for-noblelte-n920c-i-g-t-w8-8-cd.4130613/">XDA release</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <p class="meta">2025</p>
+          <div class="project-body">
+            <h3>Armbian ports for Android phones</h3>
+            <p>
+              Ported Armbian to several Android phones to explore them as inexpensive home servers and Raspberry Pi
+              alternatives, with their batteries acting as built-in UPS units and USB breakouts providing GPIO/UART
+              access.
+            </p>
+            <p class="stack">Linux · ARM · device trees · boot tooling</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="about shell" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <div class="about-copy">
+          <p>
+            I'm finishing a B.Eng. in Computer Engineering at Asia Pacific University, with a current CGPA of
+            3.63/4.00 and two Vice-Chancellor's List awards. I enjoy projects where I have to understand a system from
+            the bottom up rather than stay inside one layer of the stack.
+          </p>
+          <p>
+            I use Arch Linux as my main desktop OS and work mostly with C/C++, Python, TypeScript and Git.
+            Current interests include low-power embedded systems, autonomous robots, simulation and practical uses
+            for overlooked hardware.
+          </p>
+        </div>
+      </section>
+
+      <section class="contact shell" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <div class="contact-copy">
+          <p>If you'd like to talk about a project, research or open-source work, email is the best way to reach me.</p>
+          <div class="contact-links">
+            <a href="mailto:ahmedshazin21@gmail.com">Email</a>
+            <a href="https://github.com/xSil3nt">GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
 
   </body>
 </html>
