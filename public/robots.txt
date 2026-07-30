@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shazin.dev/sitemap.xml
