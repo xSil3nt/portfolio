@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Shazin's PO1–PO12 attainment record, with project evidence and specific areas for further development."
+    />
+    <meta name="theme-color" content="#050706" />
+    <meta property="og:title" content="PO Attainment — Shazin" />
+    <meta
+      property="og:description"
+      content="PO1–PO12 attainment, the work supporting each outcome, and the gaps still to address."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shazin.dev/po-attainment/" />
+    <meta property="og:image" content="https://shazin.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PO Attainment — Shazin" />
+    <meta
+      name="twitter:description"
+      content="PO1–PO12 attainment, project evidence, and next steps."
+    />
+    <meta name="twitter:image" content="https://shazin.dev/og.png" />
+    <link rel="canonical" href="https://shazin.dev/po-attainment/" />
+    <link
+      rel="preload"
+      href="/fonts/space-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/ibm-plex-mono-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <title>PO Attainment — Shazin</title>
+  </head>
+  <body class="po-page">
+    <a class="skip-link" href="#po-main">Skip to content</a>
+
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cursor" data-cursor aria-hidden="true"><span></span></div>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="/" aria-label="Shazin, return to portfolio">
+        <span class="brand__mark">S</span>
+        <span class="brand__name">Shazin</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/#work">Work</a>
+        <a href="/#about">About</a>
+        <a href="/po-attainment/" aria-current="page">PO Attainment</a>
+        <a href="/Shazin-Resume.pdf">Résumé</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        Menu
+      </button>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="/">Home</a>
+        <a href="/#work">Work</a>
+        <a href="/#about">About</a>
+        <a href="/po-attainment/" aria-current="page">PO Attainment</a>
+        <a href="/Shazin-Resume.pdf">Résumé</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="po-main">
+      <section class="po-hero" aria-labelledby="po-title" data-po-hero>
+        <div class="po-hero__sticky">
+          <canvas class="po-hero__canvas" data-po-canvas aria-hidden="true"></canvas>
+          <div class="scene-index po-hero__index">
+            <span>00</span>
+            <span>Programme record</span>
+          </div>
+          <div class="po-hero__copy">
+            <p class="po-eyebrow">Programme Outcome Attainment</p>
+            <h1 id="po-title">PO1—PO12.<br /> <em>Fully attained.</em></h1>
+            <p class="po-hero__lede">
+              The record gives each outcome a score of 1.00. Here is the work behind those scores and what I still need to improve.
+            </p>
+          </div>
+          <a class="po-scroll" href="#introduction">
+            <span>See the evidence</span><b>↓</b>
+          </a>
+        </div>
+      </section>
+
+      <section class="po-section po-introduction" id="introduction" aria-labelledby="introduction-title">
+        <div class="po-section__label po-reveal"><span>01</span><span>Professional introduction</span></div>
+        <div class="po-section__body">
+          <h2 id="introduction-title" class="po-reveal">
+            How I work<br />as an <em>engineer.</em>
+          </h2>
+          <div class="po-introduction__copy po-reveal">
+            <p>
+              I am a final-year Computer Engineering student focused on embedded systems, robotics,
+              simulation, and software for physical systems. Most of my work involves connecting hardware,
+              communications, and software into one working system.
+            </p>
+            <p>
+              My main examples are low-power sensor nodes, an autonomous payload drone, a multi-robot
+              agricultural simulation, and an open-source contribution to OrcaSlicer. I tend to learn by
+              building, measuring failures, and iterating until the behaviour is understood.
+            </p>
+            <p>
+              The weakness in that approach is that implementation can begin before the requirements and test
+              plan are formalised. I need to put more work into validation, standards, cost analysis, and
+              documentation before treating a system as complete.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="po-section po-swot" id="swot" aria-labelledby="swot-title">
+        <div class="po-section__label po-reveal"><span>02</span><span>SWOT analysis</span></div>
+        <div class="po-section__body">
+          <div class="po-section__heading po-reveal">
+            <h2 id="swot-title">Current strengths<br />and <em>gaps.</em></h2>
+          </div>
+          <div class="swot-grid">
+            <article class="swot-card po-reveal">
+              <span>S / Strengths</span>
+              <h3>Cross-layer implementation</h3>
+              <p>I can work across hardware, firmware, backend systems, and interfaces, and I am comfortable learning unfamiliar tools independently.</p>
+            </article>
+            <article class="swot-card po-reveal">
+              <span>W / Weaknesses</span>
+              <h3>More breadth than depth</h3>
+              <p>I have limited experience with formal compliance and engineering economics, and several projects are still prototypes rather than production systems.</p>
+            </article>
+            <article class="swot-card po-reveal">
+              <span>O / Opportunities</span>
+              <h3>Improve the work already built</h3>
+              <p>I can deepen the real-time and robotics work, add better validation, and use code review and professional feedback to find weak assumptions.</p>
+            </article>
+            <article class="swot-card po-reveal">
+              <span>T / Threats</span>
+              <h3>Limited hardware, data, and time</h3>
+              <p>Without representative hardware or field data, it is easy to overestimate a prototype. Time pressure can also reduce testing depth.</p>
+            </article>
+          </div>
+          <div class="swot-direction po-reveal">
+            <span>Development direction</span>
+            <p>
+              Work on fewer projects in more depth. Each major project should include requirements, a test plan,
+              known limitations, external review, and at least one cost or standards check.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="po-record" id="attainment" aria-labelledby="attainment-title">
+        <div class="po-record__intro">
+          <div class="po-section__label po-reveal"><span>03</span><span>PO attainment and evaluation</span></div>
+          <div class="po-record__heading po-reveal">
+            <h2 id="attainment-title">PO1–PO12,<br /><em>with evidence.</em></h2>
+            <p>
+              Each card names the relevant work and one practical improvement I can make next.
+            </p>
+          </div>
+        </div>
+
+        <div class="po-group" aria-labelledby="technical-group">
+          <header class="po-group__header po-reveal">
+            <span>GROUP 01 / PO1–PO5</span>
+            <h3 id="technical-group">Technical work</h3>
+          </header>
+          <div class="po-grid">
+            <article class="po-card po-reveal" data-po="01">
+              <div class="po-card__top"><span>PO1</span><strong>1.00</strong></div>
+              <h4>Engineering knowledge</h4>
+              <dl><div><dt>Evidence</dt><dd>Used mathematics and engineering principles in circuit, FPGA, embedded, and simulation projects.</dd></div><div><dt>Next</dt><dd>Build more depth in real-time and control systems.</dd></div></dl>
+              <a href="/#archive">View experiments ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="02">
+              <div class="po-card__top"><span>PO2</span><strong>1.00</strong></div>
+              <h4>Problem analysis</h4>
+              <dl><div><dt>Evidence</dt><dd>Separated battery limits, serial contention, routing, and task allocation into testable problems.</dd></div><div><dt>Next</dt><dd>Write formal requirements and fault cases before implementation.</dd></div></dl>
+              <a href="/#field-monitoring">View field monitoring ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="03">
+              <div class="po-card__top"><span>PO3</span><strong>1.00</strong></div>
+              <h4>Tool selection</h4>
+              <dl><div><dt>Evidence</dt><dd>Used STM32, Modbus, SimPy, FastAPI, React, Git, and diagnostic tools where each suited the task.</dd></div><div><dt>Next</dt><dd>Document tool comparisons before committing to an implementation.</dd></div></dl>
+              <a href="/#field-monitoring">View implementation ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="04">
+              <div class="po-card__top"><span>PO4</span><strong>1.00</strong></div>
+              <h4>Investigation and testing</h4>
+              <dl><div><dt>Evidence</dt><dd>Used baselines, repeatable runs, and KPI comparisons in the final-year simulation.</dd></div><div><dt>Next</dt><dd>Add sensitivity analysis and external validation data.</dd></div></dl>
+              <a href="/#fleet-simulator">View fleet simulator ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="05">
+              <div class="po-card__top"><span>PO5</span><strong>1.00</strong></div>
+              <h4>System design</h4>
+              <dl><div><dt>Evidence</dt><dd>Designed low-power telemetry behaviour and a robot-fleet simulator with linked task dependencies.</dd></div><div><dt>Next</dt><dd>Test design decisions with representative users and operating data.</dd></div></dl>
+              <a href="/#fleet-simulator">View design evidence ↗</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="po-group" aria-labelledby="professional-group">
+          <header class="po-group__header po-reveal">
+            <span>GROUP 02 / PO6–PO10</span>
+            <h3 id="professional-group">Professional practice</h3>
+          </header>
+          <div class="po-grid">
+            <article class="po-card po-reveal" data-po="06">
+              <div class="po-card__top"><span>PO6</span><strong>1.00</strong></div>
+              <h4>Technical communication</h4>
+              <dl><div><dt>Evidence</dt><dd>Produced internship handover material, dashboards, and reviewed open-source changes.</dd></div><div><dt>Next</dt><dd>Write shorter, decision-focused summaries for non-technical readers.</dd></div></dl>
+              <a href="/#field-monitoring">View handover context ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="07">
+              <div class="po-card__top"><span>PO7</span><strong>1.00</strong></div>
+              <h4>Resource use</h4>
+              <dl><div><dt>Evidence</dt><dd>Considered power consumption in remote sensor nodes and charging demand in the robot fleet.</dd></div><div><dt>Next</dt><dd>Complete a structured life-cycle or environmental assessment.</dd></div></dl>
+              <a href="/#field-monitoring">View low-power system ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="08">
+              <div class="po-card__top"><span>PO8</span><strong>1.00</strong></div>
+              <h4>Safety and standards</h4>
+              <dl><div><dt>Evidence</dt><dd>Drone testing included readiness checks, failsafes, manual override, and abort procedures.</dd></div><div><dt>Next</dt><dd>Gain direct experience with standards and formal compliance work.</dd></div></dl>
+              <a href="/#payload-drone">View safety evidence ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="09">
+              <div class="po-card__top"><span>PO9</span><strong>1.00</strong></div>
+              <h4>Professional responsibility</h4>
+              <dl><div><dt>Evidence</dt><dd>Reported limitations, prioritised safe testing, and left clear handover information.</dd></div><div><dt>Next</dt><dd>Record ethical decisions and trade-offs more systematically.</dd></div></dl>
+              <a href="/#payload-drone">View testing context ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="10">
+              <div class="po-card__top"><span>PO10</span><strong>1.00</strong></div>
+              <h4>Teamwork</h4>
+              <dl><div><dt>Evidence</dt><dd>Integrated software with flight, vision, and mechanical work in a four-person drone team.</dd></div><div><dt>Next</dt><dd>Plan and lead a small technical work package.</dd></div></dl>
+              <a href="/#payload-drone">View team project ↗</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="po-group" aria-labelledby="growth-group">
+          <header class="po-group__header po-reveal">
+            <span>GROUP 03 / PO11–PO12</span>
+            <h3 id="growth-group">Learning and project planning</h3>
+          </header>
+          <div class="po-grid po-grid--final">
+            <article class="po-card po-reveal" data-po="11">
+              <div class="po-card__top"><span>PO11</span><strong>1.00</strong></div>
+              <h4>Independent learning</h4>
+              <dl><div><dt>Evidence</dt><dd>Learned Android, Linux, simulation tools, and open-source development outside taught procedures.</dd></div><div><dt>Next</dt><dd>Keep a quarterly CPD log with evidence and feedback.</dd></div></dl>
+              <a href="/#orcaslicer">View open-source work ↗</a>
+            </article>
+            <article class="po-card po-reveal" data-po="12">
+              <div class="po-card__top"><span>PO12</span><strong>1.00</strong></div>
+              <h4>Planning and cost</h4>
+              <dl><div><dt>Evidence</dt><dd>Planned project tasks and compared robot-fleet and resource trade-offs.</dd></div><div><dt>Next</dt><dd>Practise budgeting, cost comparison, and basic business-case work.</dd></div></dl>
+              <a href="/#fleet-simulator">View planning context ↗</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="po-conclusion" id="conclusion" aria-labelledby="conclusion-title">
+        <div class="po-section__label po-reveal"><span>04</span><span>Conclusion</span></div>
+        <div class="po-conclusion__body">
+          <h2 id="conclusion-title" class="po-reveal">What I need<br />to <em>improve next.</em></h2>
+          <div class="po-conclusion__copy po-reveal">
+            <p>
+              The clearest supporting work is in systems integration, independent learning, practical safety,
+              and collaboration across software, hardware, and mechanical teams.
+            </p>
+            <p>
+              The weaker areas are formal compliance, economic analysis, leadership, and validation under
+              representative operating conditions. My next projects should produce stronger evidence in those
+              areas, rather than stopping once a prototype works.
+            </p>
+          </div>
+          <a class="po-back po-reveal" href="/">Return to portfolio <span>↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Shazin / 2026</span>
+      <span>EE014-3-3 / PO Attainment</span>
+      <a href="#po-main">Back to top ↑</a>
+    </footer>
+
+    <script type="module" src="/src/po-attainment.ts"></script>
+  </body>
+</html>
