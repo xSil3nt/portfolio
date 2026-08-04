@@ -7,5 +7,8 @@ export default defineConfig({
     cssCodeSplit: true,
     sourcemap: true,
     chunkSizeWarningLimit: 750,
+    rollupOptions: {
+      input: ["index.html", "po-attainment/index.html"],
+    },
   },
 });
