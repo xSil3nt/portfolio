@@ -69,7 +69,7 @@ test("publishes a complete PO attainment record", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toContainText("PO1—PO12. Fully attained.");
   await expect(page.getByRole("heading", { name: "How I work as an engineer." })).toBeAttached();
   await expect(page.getByRole("heading", { name: "Current strengths and gaps." })).toBeAttached();
-  await expect(page.getByRole("heading", { name: "PO1–PO12, with evidence." })).toBeAttached();
+  await expect(page.getByRole("heading", { name: "PO1–PO12 Attainment" })).toBeAttached();
   await expect(page.getByRole("heading", { name: "What I need to improve next." })).toBeAttached();
   await expect(page.locator(".header-status, .po-hero__chrome")).toHaveCount(0);
   await expect(page.getByText("The supplied record lists 1.00 for every outcome.", { exact: false })).toHaveCount(0);
