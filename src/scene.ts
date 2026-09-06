@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { VisibleLoop } from "./visible-loop";
 
 export type SceneId = "hero" | "fleet" | "node" | "slicer" | "drone";
 
@@ -300,13 +301,13 @@ export class SceneController {
   private readonly renderer: THREE.WebGLRenderer;
   private readonly camera: THREE.PerspectiveCamera;
   private readonly scene = new THREE.Scene();
-  private readonly groups: Record<SceneId, SceneGroup>;
+  private readonly groups: Partial<Record<SceneId, SceneGroup>> = {};
+  private readonly factories = { hero: makeHero, fleet: makeFleet, node: makeNode, slicer: makeSlicer, drone: makeDrone };
   private active: SceneId = "hero";
   private progress = 0;
   private pointer = new THREE.Vector2();
   private targetPointer = new THREE.Vector2();
-  private frame = 0;
-  private visible = true;
+  private readonly loop: VisibleLoop;
 
   constructor(canvas: HTMLCanvasElement) {
     this.renderer = new THREE.WebGLRenderer({
@@ -320,32 +321,30 @@ export class SceneController {
     this.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
     this.camera.position.set(0, 0, 12.5);
 
-    this.groups = {
-      hero: makeHero(),
-      fleet: makeFleet(),
-      node: makeNode(),
-      slicer: makeSlicer(),
-      drone: makeDrone(),
-    };
-
-    Object.entries(this.groups).forEach(([id, group]) => {
-      group.visible = id === this.active;
-      this.scene.add(group);
-    });
+    this.getGroup("hero").visible = true;
 
     this.resize();
     window.addEventListener("resize", this.resize);
     window.addEventListener("pointermove", this.onPointerMove, { passive: true });
-    document.addEventListener("visibilitychange", this.onVisibility);
-    this.frame = requestAnimationFrame(this.render);
+    this.loop = new VisibleLoop([...document.querySelectorAll("[data-scene]")], this.render);
   }
 
   setScene(id: SceneId): void {
     if (id === this.active) return;
-    this.groups[this.active].visible = false;
+    this.getGroup(this.active).visible = false;
     this.active = id;
-    this.groups[this.active].visible = true;
+    this.getGroup(this.active).visible = true;
     this.progress = 0;
+  }
+
+  private getGroup(id: SceneId): SceneGroup {
+    let group = this.groups[id];
+    if (!group) {
+      group = this.factories[id]();
+      this.groups[id] = group;
+      this.scene.add(group);
+    }
+    return group;
   }
 
   setProgress(progress: number): void {
@@ -353,10 +352,9 @@ export class SceneController {
   }
 
   dispose(): void {
-    cancelAnimationFrame(this.frame);
+    this.loop.dispose();
     window.removeEventListener("resize", this.resize);
     window.removeEventListener("pointermove", this.onPointerMove);
-    document.removeEventListener("visibilitychange", this.onVisibility);
     this.scene.traverse((object) => {
       if (object instanceof THREE.Mesh || object instanceof THREE.Line || object instanceof THREE.Points) {
         object.geometry.dispose();
@@ -381,19 +379,13 @@ export class SceneController {
     this.targetPointer.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
   };
 
-  private onVisibility = (): void => {
-    this.visible = document.visibilityState === "visible";
-  };
-
-  private render = (timestamp: number): void => {
-    this.frame = requestAnimationFrame(this.render);
-    if (!this.visible) return;
+  private render = (timestamp: number, delta: number): void => {
     const time = timestamp / 1000;
-    this.pointer.lerp(this.targetPointer, 0.055);
+    this.pointer.lerp(this.targetPointer, 1 - Math.pow(0.945, delta / (1000 / 60)));
     this.camera.position.x = this.pointer.x * 0.65;
     this.camera.position.y = this.pointer.y * 0.4;
     this.camera.lookAt(0, 0, 0);
-    this.groups[this.active].userData.update?.(time, this.progress);
+    this.getGroup(this.active).userData.update?.(time, this.progress);
     this.renderer.render(this.scene, this.camera);
   };
 }

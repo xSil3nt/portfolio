@@ -1,3 +1,5 @@
+import { VisibleLoop } from "./visible-loop";
+
 const SIGNAL = "#79f29b";
 const PAPER = "#f1f5f2";
 const INK = "#050706";
@@ -27,8 +29,7 @@ export class EngineeringSequence {
   private targetProgress = 0;
   private pointerX = 0;
   private pointerY = 0;
-  private frame = 0;
-  private visible = true;
+  private readonly loop: VisibleLoop;
 
   constructor(private readonly canvas: HTMLCanvasElement) {
     const context = canvas.getContext("2d");
@@ -37,8 +38,7 @@ export class EngineeringSequence {
     this.resize();
     window.addEventListener("resize", this.resize);
     window.addEventListener("pointermove", this.onPointerMove, { passive: true });
-    document.addEventListener("visibilitychange", this.onVisibility);
-    this.frame = requestAnimationFrame(this.render);
+    this.loop = new VisibleLoop([canvas], this.render);
   }
 
   setProgress(progress: number): void {
@@ -46,10 +46,9 @@ export class EngineeringSequence {
   }
 
   dispose(): void {
-    cancelAnimationFrame(this.frame);
+    this.loop.dispose();
     window.removeEventListener("resize", this.resize);
     window.removeEventListener("pointermove", this.onPointerMove);
-    document.removeEventListener("visibilitychange", this.onVisibility);
   }
 
   private resize = (): void => {
@@ -67,14 +66,9 @@ export class EngineeringSequence {
     this.pointerY = event.clientY / window.innerHeight - 0.5;
   };
 
-  private onVisibility = (): void => {
-    this.visible = document.visibilityState === "visible";
-  };
-
-  private render = (timestamp: number): void => {
-    this.frame = requestAnimationFrame(this.render);
-    if (!this.visible || this.width === 0 || this.height === 0) return;
-    this.progress += (this.targetProgress - this.progress) * 0.095;
+  private render = (timestamp: number, delta: number): void => {
+    if (this.width === 0 || this.height === 0) return;
+    this.progress += (this.targetProgress - this.progress) * (1 - Math.pow(0.905, delta / (1000 / 60)));
     this.draw(timestamp / 1000);
   };
 

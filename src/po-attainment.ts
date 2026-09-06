@@ -3,6 +3,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import "./styles.css";
 import "./po-attainment.css";
+import { initMotion } from "./motion";
+import { VisibleLoop } from "./visible-loop";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +20,7 @@ class PONetwork {
   private width = 0;
   private height = 0;
   private pixelRatio = 1;
-  private animationFrame = 0;
+  private readonly loop: VisibleLoop;
   private startTime = performance.now();
 
   constructor(private readonly canvas: HTMLCanvasElement) {
@@ -29,7 +31,7 @@ class PONetwork {
     this.resizeObserver.observe(canvas);
     this.resize();
     this.draw = this.draw.bind(this);
-    this.animationFrame = requestAnimationFrame(this.draw);
+    this.loop = new VisibleLoop([canvas], this.draw);
   }
 
   setProgress(progress: number): void {
@@ -37,13 +39,13 @@ class PONetwork {
   }
 
   dispose(): void {
-    cancelAnimationFrame(this.animationFrame);
+    this.loop.dispose();
     this.resizeObserver.disconnect();
   }
 
   private resize(): void {
     const bounds = this.canvas.getBoundingClientRect();
-    this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+    this.pixelRatio = Math.min(window.devicePixelRatio, window.innerWidth < 900 ? 1.25 : 1.6);
     this.width = bounds.width;
     this.height = bounds.height;
     this.canvas.width = Math.max(1, Math.round(bounds.width * this.pixelRatio));
@@ -57,11 +59,11 @@ class PONetwork {
     const height = this.height;
     context.clearRect(0, 0, width, height);
     if (width === 0 || height === 0) {
-      this.animationFrame = requestAnimationFrame(this.draw);
       return;
     }
 
-    const seconds = (time - this.startTime) * 0.001;
+    // A frame timestamp can precede construction when both occur in the same frame.
+    const seconds = Math.max(0, time - this.startTime) * 0.001;
     const elapsed = seconds * 0.08;
     const takeoverRaw = gsap.utils.clamp(0, 1, (this.progress - 0.5) / 0.42);
     const takeover = takeoverRaw * takeoverRaw * (3 - 2 * takeoverRaw);
@@ -373,7 +375,6 @@ class PONetwork {
     context.globalCompositeOperation = "source-over";
     context.restore();
 
-    this.animationFrame = requestAnimationFrame(this.draw);
   }
 }
 
@@ -406,32 +407,6 @@ function initMenu(lenis: Lenis | null): void {
   menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") close();
-  });
-}
-
-function initCursor(): void {
-  if (window.matchMedia("(pointer: coarse)").matches || reducedMotion) return;
-  const cursor = document.querySelector<HTMLElement>("[data-cursor]");
-  const label = cursor?.querySelector<HTMLElement>("span");
-  if (!cursor || !label) return;
-
-  const x = gsap.quickTo(cursor, "x", { duration: 0.18, ease: "power3" });
-  const y = gsap.quickTo(cursor, "y", { duration: 0.18, ease: "power3" });
-  window.addEventListener("pointermove", (event) => {
-    x(event.clientX);
-    y(event.clientY);
-    cursor.style.opacity = "1";
-  });
-
-  document.querySelectorAll<HTMLElement>("a, button").forEach((element) => {
-    element.addEventListener("pointerenter", () => {
-      cursor.classList.add("is-active");
-      label.textContent = "OPEN";
-    });
-    element.addEventListener("pointerleave", () => {
-      cursor.classList.remove("is-active");
-      label.textContent = "";
-    });
   });
 }
 
@@ -507,7 +482,7 @@ function init(): void {
   });
 
   initMenu(lenis);
-  initCursor();
+  initMotion();
   window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
   window.addEventListener("pagehide", () => {
     network?.dispose();

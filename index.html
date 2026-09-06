@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Shazin builds embedded systems, autonomous machines, simulations, and practical software."
+      content="I'm Shazin, a computer engineering student. These are my projects in embedded systems, robotics, simulation, and software."
     />
     <meta name="theme-color" content="#050706" />
     <meta property="og:title" content="Shazin — Embedded Systems, Robotics & Software" />
@@ -41,7 +41,7 @@
       crossorigin
     />
     <link rel="icon" href="/favicon.png" type="image/png" />
-    <title>Shazin — Embedded Systems, Robotics & Software</title>
+    <title>Shazin | Embedded systems, robotics & software</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -63,22 +63,8 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="boot" data-boot aria-hidden="true">
-      <div class="boot__inner">
-        <p class="boot__label">SHAZIN / SYSTEMS</p>
-        <div class="boot__line"><span data-boot-line></span></div>
-        <div class="boot__readout">
-          <span data-boot-text>INITIALISING</span>
-          <span data-boot-count>00</span>
-        </div>
-      </div>
-    </div>
-
     <canvas class="world" data-world aria-hidden="true"></canvas>
     <div class="noise" aria-hidden="true"></div>
-    <div class="cursor" data-cursor aria-hidden="true">
-      <span></span>
-    </div>
 
     <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="Shazin, back to top">
@@ -88,7 +74,7 @@
       <nav class="nav" aria-label="Primary navigation">
         <a href="#work">Work</a>
         <a href="#about">About</a>
-        <a href="/po-attainment/">PO Attainment</a>
+        <a href="/po-attainment/">PO attainment</a>
         <a href="/Shazin-Resume.pdf">Résumé</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -99,7 +85,7 @@
       <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
         <a href="#work">Work</a>
         <a href="#about">About</a>
-        <a href="/po-attainment/">PO Attainment</a>
+        <a href="/po-attainment/">PO attainment</a>
         <a href="/Shazin-Resume.pdf">Résumé</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -119,10 +105,11 @@
             </h1>
             <div class="hero__foot reveal">
               <p>
-                My work spans firmware, telemetry, simulation, autonomy, and full-stack software.
+                I'm Shazin, a computer engineering student. I write firmware for field sensors,
+                simulate robot fleets, and contribute to open-source software.
               </p>
-              <a class="round-link" href="#work" data-magnetic>
-                <span>Explore<br />the work</span>
+              <a class="round-link" href="#work">
+                <span>See my<br />projects</span>
                 <b>↓</b>
               </a>
             </div>
@@ -132,10 +119,6 @@
             <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
 
-          <div class="hero__readout" aria-hidden="true">
-            <span>FIELD / ACTIVE</span>
-            <span data-hero-coord>X 00.00 / Y 00.00</span>
-          </div>
         </div>
       </section>
 
@@ -143,8 +126,7 @@
         <div class="motion-story__sticky">
           <canvas class="motion-story__canvas" data-engineering-sequence aria-hidden="true"></canvas>
           <div class="motion-story__chrome" aria-hidden="true">
-            <span>01 / SYSTEM PATH</span>
-            <span data-sequence-readout>REGISTER 0x00</span>
+            <span>01 / How the pieces connect</span>
           </div>
           <h2 id="motion-story-title" class="sr-only">From sensor data to coordinated machines.</h2>
           <div class="motion-story__statements">
@@ -152,10 +134,10 @@
               Sensor<br /><strong>input.</strong>
             </p>
             <p class="motion-statement" data-motion-statement>
-              Reliable<br /><strong>telemetry.</strong>
+              Sending<br /><strong>readings.</strong>
             </p>
             <p class="motion-statement" data-motion-statement>
-              System<br /><strong>decisions.</strong>
+              Assigning<br /><strong>tasks.</strong>
             </p>
             <p class="motion-statement" data-motion-statement>
               Fleet<br /><strong>coordination.</strong>
@@ -172,8 +154,8 @@
           <span>02</span>
           <span>Selected work</span>
         </div>
-        <h2 id="work-title">Four projects across<br /><span>embedded systems, simulation, and autonomy.</span></h2>
-        <p>Scroll through the engineering behind each one.</p>
+        <h2 id="work-title">A few things<br /><span>I've worked on.</span></h2>
+        <p>My final-year simulator, field monitoring work, an open-source contribution, and a team drone project.</p>
       </section>
 
       <article class="case-study case-study--fleet" id="fleet-simulator" data-project data-scene="fleet">
@@ -181,7 +163,7 @@
           <div class="case-study__meta">
             <span class="case-study__number">P.01</span>
             <span>Simulation / Full-stack</span>
-            <span>2026 — Ongoing</span>
+            <span>2026 / Ongoing</span>
           </div>
 
           <div class="case-study__stage">
@@ -193,26 +175,26 @@
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
                 <span>01 / Problem</span>
-                <h3>Three robot types. One dependent pipeline.</h3>
+                <h3>Harvesters need collectors to keep up.</h3>
                 <p>
-                  Langur harvesters, Howler collectors, and Mandril transporters must stay productive while
-                  sharing routes, charging capacity, and time.
+                  Langur robots harvest, Howler robots collect, and Mandril robots transport the crop.
+                  The simulation models how they share routes and chargers while waiting on each other's work.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>02 / System</span>
-                <h3>Geospatial field data drives the simulation.</h3>
+                <h3>Modelling the field and the fleet.</h3>
                 <p>
-                  A SimPy core ingests geospatial fields, generates Delaunay cells, models battery constraints,
-                  and compares Hungarian assignment against simpler baselines.
+                  I use SimPy to model the fleet, with Delaunay cells generated from geospatial field data.
+                  The model tracks battery limits and compares the Hungarian assignment algorithm with simpler methods.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Interface</span>
-                <h3>Every run can be watched, repeated, and compared.</h3>
+                <h3>Watching a run and comparing the results.</h3>
                 <p>
-                  FastAPI, SQLite, React, and WebSockets turn parameter sweeps into live fleet state and
-                  decision-ready KPIs.
+                  A React dashboard shows the fleet state over WebSockets. FastAPI and SQLite handle the
+                  simulation runs and results, so I can change parameters and compare performance.
                 </p>
               </section>
             </div>
@@ -243,27 +225,27 @@
 
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
-                <span>01 / Sense</span>
-                <h3>Low-power sensor-based monitoring.</h3>
+                <span>01 / Sensor nodes</span>
+                <h3>Reading sensors on a battery budget.</h3>
                 <p>
                   Custom STM32U0 nodes detect field sensors, read registers over Modbus/RS-485, and monitor
                   their own battery state.
                 </p>
               </section>
               <section class="beat" data-beat>
-                <span>02 / Survive</span>
-                <h3>Store telemetry when connectivity fails.</h3>
+                <span>02 / Offline storage</span>
+                <h3>Keeping readings when the connection drops.</h3>
                 <p>
-                  FRAM and EEPROM fallback storage queue telemetry for retransmission, while RTC shutdown and
-                  deep sleep protect the energy budget.
+                  The nodes queue unsent readings in FRAM and EEPROM for the next connection.
+                  RTC-controlled shutdown and deep sleep reduce power use between readings.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Uplink</span>
                 <h3>Compact telemetry over Iridium SBD.</h3>
                 <p>
-                  Compact packets travel through Iridium Short Burst Data. The system was validated in field
-                  deployments and documented for handover.
+                  The nodes send compact packets through Iridium Short Burst Data.
+                  This work included field validation and handover documentation.
                 </p>
               </section>
             </div>
@@ -283,38 +265,38 @@
           <div class="case-study__meta">
             <span class="case-study__number">P.03</span>
             <span>Open source / C++</span>
-            <span>2025 — 2026</span>
+            <span>2025 / 2026</span>
           </div>
 
           <div class="case-study__stage">
             <div class="case-study__title">
               <p>OrcaSlicer FullSpectrum</p>
-              <h2>More colors,<br />same printer.</h2>
+              <h2>More colours,<br />same printer.</h2>
             </div>
 
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
                 <span>01 / Constraint</span>
-                <h3>Mix colour through toolpath structure.</h3>
+                <h3>Getting more colours out of the same filament.</h3>
                 <p>
-                  Full-spectrum filament work requires the slicer to represent continuous colour intent using
-                  discrete paths and physical extrusion.
+                  A printer has a limited set of filament colours. Dithering places those colours in patterns
+                  so the print can appear to have shades between them.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>02 / Contribution</span>
-                <h3>Implementing local-Z dithering in OrcaSlicer.</h3>
+                <h3>My part in local-Z dithering.</h3>
                 <p>
-                  I contributed C++ colour-mixing and dithering work with ratdoux and collaborators, then
-                  supported integration, testing, documentation, and maintenance.
+                  I worked with ratdoux and other contributors on colour mixing and dithering in C++.
+                  I also helped integrate and test the changes, write documentation, and maintain the code.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Outcome</span>
-                <h3>Merged by the manufacturer. Credited upstream.</h3>
+                <h3>Now in Snapmaker's official slicer.</h3>
                 <p>
-                  Snapmaker shipped the co-authored work in its official slicer, and upstream OrcaSlicer
-                  credits the contribution in its mainline integration.
+                  Snapmaker shipped our work in its official slicer. The upstream OrcaSlicer integration
+                  also credits our contribution. Both pull requests are linked below.
                 </p>
                 <div class="beat__links">
                   <a href="https://github.com/Snapmaker/OrcaSlicer/pull/409">Snapmaker PR ↗</a>
@@ -349,27 +331,27 @@
 
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
-                <span>01 / Observe</span>
-                <h3>Flight telemetry in a shared browser dashboard.</h3>
+                <span>01 / Dashboard</span>
+                <h3>Seeing what the drone is doing.</h3>
                 <p>
                   I built the Raspberry Pi 5 telemetry backend, WebSocket server, and browser dashboard for
                   vehicle state, mission progress, payload status, and ArUco visualisation.
                 </p>
               </section>
               <section class="beat" data-beat>
-                <span>02 / Integrate</span>
-                <h3>Multiplexing serial and telemetry contention.</h3>
+                <span>02 / Integration</span>
+                <h3>Sharing one telemetry connection.</h3>
                 <p>
-                  A MAVProxy UDP multiplexer resolved serial contention, while compiled RealSense support and
-                  tuned telemetry rates kept the system responsive.
+                  I used MAVProxy to share telemetry over UDP and resolve conflicts over the serial connection.
+                  I also compiled RealSense support and adjusted telemetry rates to keep updates responsive.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Test</span>
-                <h3>Manual override, abort, and loss-of-control procedures.</h3>
+                <h3>Planning for a flight to go wrong.</h3>
                 <p>
-                  The team built pre-flight, override, abort, and loss-of-control procedures. Integrated
-                  payload testing recorded a 9 N peak impact.
+                  Our team wrote pre-flight checks and procedures for manual override, aborts, and loss of control.
+                  Payload testing recorded a peak impact force of 9 N.
                 </p>
               </section>
             </div>
@@ -394,24 +376,22 @@
           <a
             class="archive-row"
             href="https://xdaforums.com/t/rom-10-0-official-eol-blissrom-12-12-for-noblelte-n920c-i-g-t-w8-8-cd.4130613/"
-            data-cursor-label="VIEW"
           >
             <span>01</span><h3>BlissROM / Galaxy Note 5</h3><p>Android · Linux · Kernel</p><strong>10,000+ downloads</strong>
           </a>
-          <div class="archive-row" data-cursor-label="PORT">
+          <div class="archive-row">
             <span>02</span><h3>Armbian on Android phones</h3><p>Linux · ARM · Device trees</p><strong>Battery as built-in UPS</strong>
           </div>
-          <a class="archive-row" href="https://atlas.shazin.dev/" data-cursor-label="OPEN">
+          <a class="archive-row" href="https://atlas.shazin.dev/">
             <span>03</span><h3>Lifestitchr Atlas</h3><p>JavaScript · Python · CSS</p><strong>Live deckbuilder ↗</strong>
           </a>
         </div>
 
-        <div class="experiment-ticker" aria-label="Additional experiments">
-          <div>
-            <span>VHDL / FPGA</span><i></i><span>BJT amplifiers</span><i></i><span>ESP32 infotainment</span><i></i>
-            <span>YOLO plant vision</span><i></i><span>VHDL / FPGA</span><i></i><span>BJT amplifiers</span><i></i>
-            <span>ESP32 infotainment</span><i></i><span>YOLO plant vision</span>
-          </div>
+        <div class="experiments">
+          <p>I've also worked on</p>
+          <ul aria-label="Additional experiments">
+            <li>VHDL / FPGA</li><li>BJT amplifiers</li><li>ESP32 infotainment</li><li>YOLO plant vision</li>
+          </ul>
         </div>
       </section>
 
@@ -419,16 +399,16 @@
         <div class="scene-index"><span>04</span><span>About</span></div>
         <div class="about__body">
           <h2 id="about-title">
-            I work across hardware, firmware, backend systems, and interfaces.
+            Hardware and software,<br />usually in the same project.
           </h2>
           <div class="about__copy">
             <p>
-              I’m finishing a B.Eng. in Computer Engineering at Asia Pacific University with a 3.63/4.00 CGPA
-              and two Vice-Chancellor’s List awards.
+              I'm finishing a B.Eng. in Computer Engineering at Asia Pacific University. My CGPA is 3.63/4.00,
+              and I've received two Vice-Chancellor's List awards.
             </p>
             <p>
-              Arch Linux is my daily environment. C/C++, Python, TypeScript, and Git are the tools I reach for
-              most, but the problem decides the stack.
+              I use Arch Linux day to day and write most of my code in C/C++, Python, and TypeScript.
+              Outside my degree, I've worked on Android ROMs, brought Linux to old phones, and contributed to OrcaSlicer.
             </p>
           </div>
           <dl class="skills">
@@ -445,7 +425,7 @@
         <p class="contact__eyebrow">Embedded / Robotics / Autonomy / Systems</p>
         <h2 id="contact-title">Get in touch.</h2>
         <div class="contact__actions">
-          <a class="contact__email" href="mailto:ahmedshazin21@gmail.com" data-magnetic>
+          <a class="contact__email" href="mailto:ahmedshazin21@gmail.com">
             ahmedshazin21@gmail.com <span>↗</span>
           </a>
           <div>

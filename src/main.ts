@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import "./styles.css";
+import { initMotion } from "./motion";
 import { SceneController, type SceneId } from "./scene";
 import { EngineeringSequence } from "./sequence";
 
@@ -11,48 +12,6 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matc
 const compactLayout = window.matchMedia("(max-width: 980px)").matches;
 const documentRoot = document.documentElement;
 documentRoot.classList.add("js-ready");
-
-function initBoot(): Promise<void> {
-  const boot = document.querySelector<HTMLElement>("[data-boot]");
-  const line = document.querySelector<HTMLElement>("[data-boot-line]");
-  const count = document.querySelector<HTMLElement>("[data-boot-count]");
-  const text = document.querySelector<HTMLElement>("[data-boot-text]");
-  const hasBooted = sessionStorage.getItem("shazin-booted") === "true";
-
-  if (!boot || !line || !count || !text || reducedMotion || hasBooted) {
-    return Promise.resolve();
-  }
-
-  documentRoot.classList.add("boot-active");
-  sessionStorage.setItem("shazin-booted", "true");
-
-  return new Promise((resolve) => {
-    const state = { value: 0 };
-    const timeline = gsap.timeline({
-      onComplete: () => {
-        documentRoot.classList.remove("boot-active");
-        resolve();
-      },
-    });
-
-    timeline
-      .to(line, { scaleX: 1, duration: 0.9, ease: "power3.inOut" })
-      .to(
-        state,
-        {
-          value: 100,
-          duration: 0.9,
-          ease: "power2.inOut",
-          onUpdate: () => {
-            count.textContent = Math.round(state.value).toString().padStart(2, "0");
-            if (state.value > 70) text.textContent = "SYSTEMS ONLINE";
-          },
-        },
-        0,
-      )
-      .to(boot, { yPercent: -100, duration: 0.7, ease: "power4.inOut", delay: 0.15 });
-  });
-}
 
 function splitWords(): HTMLElement[] {
   const heading = document.querySelector<HTMLElement>("[data-split]");
@@ -81,6 +40,10 @@ function splitWords(): HTMLElement[] {
 }
 
 function initHero(words: HTMLElement[]): void {
+  if (reducedMotion) {
+    gsap.set(".reveal", { opacity: 1, y: 0 });
+    return;
+  }
   gsap
     .timeline({ defaults: { ease: "power4.out" } })
     .fromTo(words, { yPercent: 110, opacity: 0, rotate: 3 }, {
@@ -113,7 +76,28 @@ function initScroll(
     window.addEventListener("pagehide", () => gsap.ticker.remove(update), { once: true });
   }
 
-  if (compactLayout || reducedMotion) {
+  if (reducedMotion) {
+    gsap.set(".reveal", { opacity: 1, y: 0 });
+  } else if (compactLayout) {
+    document.querySelectorAll<HTMLElement>("[data-scene]").forEach((section) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top center",
+        end: "bottom center",
+        onToggle: (self) => {
+          if (self.isActive) scene?.setScene(section.dataset.scene as SceneId);
+        },
+        onUpdate: (self) => {
+          if (self.isActive) scene?.setProgress(self.progress);
+        },
+      });
+    });
+    ScrollTrigger.create({
+      trigger: "[data-motion-story]",
+      start: "top bottom",
+      end: "bottom top",
+      onUpdate: (self) => sequence?.setProgress(self.progress),
+    });
     document.querySelectorAll<HTMLElement>(".reveal").forEach((element) => {
       ScrollTrigger.create({
         trigger: element,
@@ -139,7 +123,7 @@ function initScroll(
     heroTimeline
       .to(".site-header", { yPercent: -120, duration: 0.16, ease: "power2.in" }, 0.06)
       .to(".hero__foot", { y: 100, opacity: 0, duration: 0.22, ease: "power2.in" }, 0)
-      .to(".hero__index, .hero__readout, .kicker", {
+      .to(".hero__index", {
         opacity: 0,
         duration: 0.16,
         ease: "none",
@@ -170,8 +154,6 @@ function initScroll(
       }, 0.72);
 
     const statements = [...document.querySelectorAll<HTMLElement>("[data-motion-statement]")];
-    const sequenceReadout = document.querySelector<HTMLElement>("[data-sequence-readout]");
-    const readouts = ["REGISTER 0x00", "PACKET / QUEUED", "STATE / RESOLVED", "FLEET / ACTIVE"];
     const motionTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "[data-motion-story]",
@@ -184,8 +166,6 @@ function initScroll(
         onLeaveBack: () => gsap.to(".site-header", { yPercent: 0, duration: 0.45, ease: "power3.out" }),
         onUpdate: (self) => {
           sequence?.setProgress(self.progress);
-          const stage = Math.min(3, Math.floor(self.progress * 4));
-          if (sequenceReadout) sequenceReadout.textContent = readouts[stage];
         },
       },
     });
@@ -230,6 +210,19 @@ function initScroll(
       motionField.append(scan);
       sticky?.prepend(motionField);
       const rings = [...motionField.querySelectorAll<HTMLElement>("i")];
+      const ringSetters = rings.map((ring) => ({
+        x: gsap.quickSetter(ring, "xPercent"),
+        y: gsap.quickSetter(ring, "yPercent"),
+        scale: gsap.quickSetter(ring, "scale"),
+        rotate: gsap.quickSetter(ring, "rotation"),
+      }));
+      const titleSetters = title ? {
+        x: gsap.quickSetter(title, "xPercent"),
+        y: gsap.quickSetter(title, "yPercent"),
+        scale: gsap.quickSetter(title, "scale"),
+        opacity: gsap.quickSetter(title, "opacity"),
+      } : null;
+      const scanY = gsap.quickSetter(scan, "y", "px");
       let activeBeat = -1;
 
       const activateBeat = (index: number) => {
@@ -240,7 +233,7 @@ function initScroll(
           beat.classList.toggle("is-active", active);
           gsap.to(beat, {
             autoAlpha: active ? 1 : 0,
-            y: active ? 0 : active ? 0 : beatIndex < index ? -32 : 32,
+            y: active ? 0 : beatIndex < index ? -32 : 32,
             duration: 0.45,
             ease: "power2.out",
             overwrite: true,
@@ -258,23 +251,19 @@ function initScroll(
         onUpdate: (self) => {
           scene?.setProgress(self.progress);
           activateBeat(Math.min(beats.length - 1, Math.floor(self.progress * beats.length)));
-          if (title) {
-            gsap.set(title, {
-              yPercent: self.progress * -16,
-              xPercent: self.progress * -4,
-              scale: 1 - self.progress * 0.08,
-              opacity: 1 - self.progress * 0.36,
-            });
+          if (titleSetters) {
+            titleSetters.y(self.progress * -16);
+            titleSetters.x(self.progress * -4);
+            titleSetters.scale(1 - self.progress * 0.08);
+            titleSetters.opacity(1 - self.progress * 0.36);
           }
-          rings.forEach((ring, index) => {
-            gsap.set(ring, {
-              xPercent: -95 + self.progress * (130 + index * 13),
-              yPercent: Math.sin(self.progress * Math.PI * 2 + index) * 14,
-              scale: 0.75 + self.progress * 0.55 + index * 0.045,
-              rotate: self.progress * (index % 2 === 0 ? 85 : -85),
-            });
+          ringSetters.forEach((set, index) => {
+            set.x(-95 + self.progress * (130 + index * 13));
+            set.y(Math.sin(self.progress * Math.PI * 2 + index) * 14);
+            set.scale(0.75 + self.progress * 0.55 + index * 0.045);
+            set.rotate(self.progress * (index % 2 === 0 ? 85 : -85));
           });
-          gsap.set(scan, { y: self.progress * window.innerHeight });
+          scanY(self.progress * window.innerHeight);
         },
       });
     });
@@ -302,58 +291,6 @@ function initScroll(
   });
 
   return lenis;
-}
-
-function initCursor(): void {
-  if (window.matchMedia("(pointer: coarse)").matches || reducedMotion) return;
-  const cursor = document.querySelector<HTMLElement>("[data-cursor]");
-  const label = cursor?.querySelector<HTMLElement>("span");
-  if (!cursor || !label) return;
-
-  const x = gsap.quickTo(cursor, "x", { duration: 0.18, ease: "power3" });
-  const y = gsap.quickTo(cursor, "y", { duration: 0.18, ease: "power3" });
-  const coordinate = document.querySelector<HTMLElement>("[data-hero-coord]");
-
-  window.addEventListener("pointermove", (event) => {
-    x(event.clientX);
-    y(event.clientY);
-    cursor.style.opacity = "1";
-    if (coordinate) {
-      coordinate.textContent = `X ${((event.clientX / innerWidth) * 100).toFixed(2)} / Y ${(
-        (event.clientY / innerHeight) *
-        100
-      ).toFixed(2)}`;
-    }
-  });
-
-  document.querySelectorAll<HTMLElement>("[data-cursor-label], a, button").forEach((element) => {
-    element.addEventListener("pointerenter", () => {
-      cursor.classList.add("is-active");
-      label.textContent = element.dataset.cursorLabel ?? "OPEN";
-    });
-    element.addEventListener("pointerleave", () => {
-      cursor.classList.remove("is-active");
-      label.textContent = "";
-    });
-  });
-}
-
-function initMagneticLinks(): void {
-  if (window.matchMedia("(pointer: coarse)").matches || reducedMotion) return;
-  document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((element) => {
-    element.addEventListener("pointermove", (event) => {
-      const bounds = element.getBoundingClientRect();
-      gsap.to(element, {
-        x: (event.clientX - bounds.left - bounds.width / 2) * 0.14,
-        y: (event.clientY - bounds.top - bounds.height / 2) * 0.14,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    });
-    element.addEventListener("pointerleave", () => {
-      gsap.to(element, { x: 0, y: 0, duration: 0.55, ease: "elastic.out(1, 0.35)" });
-    });
-  });
 }
 
 function initMenu(lenis: Lenis | null): void {
@@ -388,8 +325,7 @@ function initMenu(lenis: Lenis | null): void {
   });
 }
 
-async function init(): Promise<void> {
-  const boot = initBoot();
+function init(): void {
   let scene: SceneController | null = null;
   let sequence: EngineeringSequence | null = null;
   if (!reducedMotion) {
@@ -414,11 +350,9 @@ async function init(): Promise<void> {
 
   const heroWords = splitWords();
   const lenis = initScroll(scene, sequence, heroWords);
-  initCursor();
-  initMagneticLinks();
   initMenu(lenis);
-  await boot;
   initHero(heroWords);
+  initMotion();
 
   window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
   window.addEventListener("pagehide", () => {
@@ -428,4 +362,4 @@ async function init(): Promise<void> {
   }, { once: true });
 }
 
-void init();
+init();
