@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="I'm Shazin, a computer engineering student. These are my projects in embedded systems, robotics, simulation, and software."
+      content="Shazin, computer engineering graduate. Projects in embedded systems, robotics, and software."
     />
     <meta name="theme-color" content="#050706" />
     <meta property="og:title" content="Shazin — Embedded Systems, Robotics & Software" />
@@ -105,8 +105,7 @@
             </h1>
             <div class="hero__foot reveal">
               <p>
-                I'm Shazin, a computer engineering student. I write firmware for field sensors,
-                simulate robot fleets, and contribute to open-source software.
+                I'm Shazin, a computer engineering graduate. I work on firmware, robots, and open-source software.
               </p>
               <a class="round-link" href="#work">
                 <span>See my<br />projects</span>
@@ -126,7 +125,7 @@
         <div class="motion-story__sticky">
           <canvas class="motion-story__canvas" data-engineering-sequence aria-hidden="true"></canvas>
           <div class="motion-story__chrome" aria-hidden="true">
-            <span>01 / How the pieces connect</span>
+            <span>01 / From sensors to robots</span>
           </div>
           <h2 id="motion-story-title" class="sr-only">From sensor data to coordinated machines.</h2>
           <div class="motion-story__statements">
@@ -154,8 +153,7 @@
           <span>02</span>
           <span>Selected work</span>
         </div>
-        <h2 id="work-title">A few things<br /><span>I've worked on.</span></h2>
-        <p>My final-year simulator, field monitoring work, an open-source contribution, and a team drone project.</p>
+        <h2 id="work-title">Selected<br /><span>projects.</span></h2>
       </section>
 
       <article class="case-study case-study--fleet" id="fleet-simulator" data-project data-scene="fleet">
@@ -168,33 +166,30 @@
 
           <div class="case-study__stage">
             <div class="case-study__title">
-              <p>Agricultural robot fleet simulator</p>
-              <h2>Simulating coordinated<br />field robots.</h2>
+              <p>Final-year project</p>
+              <h2>Robot fleet<br />simulator.</h2>
             </div>
 
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
                 <span>01 / Problem</span>
-                <h3>Harvesters need collectors to keep up.</h3>
+                <h3>Harvest, collect, transport.</h3>
                 <p>
-                  Langur robots harvest, Howler robots collect, and Mandril robots transport the crop.
-                  The simulation models how they share routes and chargers while waiting on each other's work.
+                  Langur harvesters, Howler collectors, and Mandril transporters share routes and chargers in this oil-palm harvesting simulation.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>02 / System</span>
-                <h3>Modelling the field and the fleet.</h3>
+                <h3>Field model.</h3>
                 <p>
-                  I use SimPy to model the fleet, with Delaunay cells generated from geospatial field data.
-                  The model tracks battery limits and compares the Hungarian assignment algorithm with simpler methods.
+                  I built the SimPy model with geospatial field data, battery limits, and drainage-aware routing. It compares Hungarian, greedy, and field-sequential task assignment.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Interface</span>
-                <h3>Watching a run and comparing the results.</h3>
+                <h3>Run comparisons.</h3>
                 <p>
-                  A React dashboard shows the fleet state over WebSockets. FastAPI and SQLite handle the
-                  simulation runs and results, so I can change parameters and compare performance.
+                  A React dashboard shows fleet activity over WebSockets. FastAPI and SQLite store runs for comparing fleet sizes, robot ratios, and charging capacity.
                 </p>
               </section>
             </div>
@@ -219,33 +214,30 @@
 
           <div class="case-study__stage">
             <div class="case-study__title">
-              <p>Satellite-connected field monitoring</p>
-              <h2>Satellite telemetry for<br />remote field sensors.</h2>
+              <p>Averis internship</p>
+              <h2>Satellite-connected<br />field sensors.</h2>
             </div>
 
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
                 <span>01 / Sensor nodes</span>
-                <h3>Reading sensors on a battery budget.</h3>
+                <h3>Battery-powered sensor nodes.</h3>
                 <p>
-                  Custom STM32U0 nodes detect field sensors, read registers over Modbus/RS-485, and monitor
-                  their own battery state.
+                  I wrote C++ firmware for STM32U0 nodes that read water-level sensors over Modbus/RS-485 and monitor battery charge.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>02 / Offline storage</span>
-                <h3>Keeping readings when the connection drops.</h3>
+                <h3>Store now, send later.</h3>
                 <p>
-                  The nodes queue unsent readings in FRAM and EEPROM for the next connection.
-                  RTC-controlled shutdown and deep sleep reduce power use between readings.
+                  Unsent readings stay in FRAM and EEPROM until the next connection. RTC shutdown and deep sleep save power between readings.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Uplink</span>
-                <h3>Compact telemetry over Iridium SBD.</h3>
+                <h3>Satellite uplink.</h3>
                 <p>
-                  The nodes send compact packets through Iridium Short Burst Data.
-                  This work included field validation and handover documentation.
+                  The nodes send readings through Iridium Short Burst Data. I tested them in the field and wrote the handover documentation.
                 </p>
               </section>
             </div>
@@ -271,32 +263,29 @@
           <div class="case-study__stage">
             <div class="case-study__title">
               <p>OrcaSlicer FullSpectrum</p>
-              <h2>More colours,<br />same printer.</h2>
+              <h2>Colour mixing<br />for OrcaSlicer.</h2>
             </div>
 
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
                 <span>01 / Constraint</span>
-                <h3>Getting more colours out of the same filament.</h3>
+                <h3>Mixing filament colours.</h3>
                 <p>
-                  A printer has a limited set of filament colours. Dithering places those colours in patterns
-                  so the print can appear to have shades between them.
+                  Dithering arranges filament colours in patterns to produce shades between them.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>02 / Contribution</span>
-                <h3>My part in local-Z dithering.</h3>
+                <h3>Local-Z dithering.</h3>
                 <p>
-                  I worked with ratdoux and other contributors on colour mixing and dithering in C++.
-                  I also helped integrate and test the changes, write documentation, and maintain the code.
+                  I worked with ratdoux and other contributors on C++ colour mixing and local-Z dithering, including integration, testing, and documentation.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Outcome</span>
-                <h3>Now in Snapmaker's official slicer.</h3>
+                <h3>Merged into Snapmaker’s slicer.</h3>
                 <p>
-                  Snapmaker shipped our work in its official slicer. The upstream OrcaSlicer integration
-                  also credits our contribution. Both pull requests are linked below.
+                  Snapmaker merged our work into its official slicer. Upstream OrcaSlicer also credits the contribution.
                 </p>
                 <div class="beat__links">
                   <a href="https://github.com/Snapmaker/OrcaSlicer/pull/409">Snapmaker PR ↗</a>
@@ -325,33 +314,30 @@
 
           <div class="case-study__stage">
             <div class="case-study__title">
-              <p>Autonomous payload drone</p>
-              <h2>Telemetry and control for an<br />autonomous payload drone.</h2>
+              <p>Four-person team project</p>
+              <h2>Drone telemetry<br />and control.</h2>
             </div>
 
             <div class="case-study__beats">
               <section class="beat is-active" data-beat>
                 <span>01 / Dashboard</span>
-                <h3>Seeing what the drone is doing.</h3>
+                <h3>Flight dashboard.</h3>
                 <p>
-                  I built the Raspberry Pi 5 telemetry backend, WebSocket server, and browser dashboard for
-                  vehicle state, mission progress, payload status, and ArUco visualisation.
+                  I built the Raspberry Pi 5 MAVLink backend and browser dashboard for flight state, mission progress, payload status, and ArUco markers.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>02 / Integration</span>
-                <h3>Sharing one telemetry connection.</h3>
+                <h3>Shared telemetry.</h3>
                 <p>
-                  I used MAVProxy to share telemetry over UDP and resolve conflicts over the serial connection.
-                  I also compiled RealSense support and adjusted telemetry rates to keep updates responsive.
+                  I used MAVProxy to share telemetry over UDP, resolved serial conflicts, and compiled RealSense support for the Pi.
                 </p>
               </section>
               <section class="beat" data-beat>
                 <span>03 / Test</span>
-                <h3>Planning for a flight to go wrong.</h3>
+                <h3>Flight and payload tests.</h3>
                 <p>
-                  Our team wrote pre-flight checks and procedures for manual override, aborts, and loss of control.
-                  Payload testing recorded a peak impact force of 9 N.
+                  Our team tested manual override, aborts, and failsafes. Payload tests recorded a peak impact force of 9 N.
                 </p>
               </section>
             </div>
@@ -366,10 +352,24 @@
         </div>
       </article>
 
+      <section class="project-note" id="hingaa" aria-labelledby="hingaa-title">
+        <div>
+          <p class="project-note__label">Web app / October 2026</p>
+          <h2 id="hingaa-title">Hingaa</h2>
+          <p class="project-note__award">Top 6 · Maldives Bureau of Statistics Datathon 2026</p>
+        </div>
+        <div class="project-note__copy">
+          <h3>Bus routes around Greater Malé.</h3>
+          <p>I built a journey planner with map-based routes and step-by-step directions, using RTL and MTCC transport data with Google Maps.</p>
+          <p class="project-note__tech">JavaScript · Node.js · Google Maps · Vercel</p>
+          <a href="https://github.com/xSil3nt/hingaa">View on GitHub ↗</a>
+        </div>
+      </section>
+
       <section class="archive" id="archive" aria-labelledby="archive-title">
         <div class="archive__header">
           <div class="scene-index"><span>03</span><span>Archive</span></div>
-          <h2 id="archive-title">Other projects<br />and experiments.</h2>
+          <h2 id="archive-title">More projects.</h2>
         </div>
 
         <div class="archive__list">
@@ -388,7 +388,7 @@
         </div>
 
         <div class="experiments">
-          <p>I've also worked on</p>
+          <p>Coursework</p>
           <ul aria-label="Additional experiments">
             <li>VHDL / FPGA</li><li>BJT amplifiers</li><li>ESP32 infotainment</li><li>YOLO plant vision</li>
           </ul>
@@ -399,16 +399,14 @@
         <div class="scene-index"><span>04</span><span>About</span></div>
         <div class="about__body">
           <h2 id="about-title">
-            Hardware and software,<br />usually in the same project.
+            About me.
           </h2>
           <div class="about__copy">
             <p>
-              I'm finishing a B.Eng. in Computer Engineering at Asia Pacific University. My CGPA is 3.63/4.00,
-              and I've received two Vice-Chancellor's List awards.
+              B.Eng. Computer Engineering graduate from Asia Pacific University. CGPA 3.58/4.00, with two Vice-Chancellor's List awards.
             </p>
             <p>
-              I use Arch Linux day to day and write most of my code in C/C++, Python, and TypeScript.
-              Outside my degree, I've worked on Android ROMs, brought Linux to old phones, and contributed to OrcaSlicer.
+              I use Arch Linux and mostly write C/C++, Python, and TypeScript. My side projects include Android ROMs and Linux ports for old phones.
             </p>
           </div>
           <dl class="skills">
@@ -422,7 +420,6 @@
 
       <section class="contact" id="contact" aria-labelledby="contact-title">
         <div class="contact__status"><i></i> Available for graduate engineering roles</div>
-        <p class="contact__eyebrow">Embedded / Robotics / Autonomy / Systems</p>
         <h2 id="contact-title">Get in touch.</h2>
         <div class="contact__actions">
           <a class="contact__email" href="mailto:ahmedshazin21@gmail.com">

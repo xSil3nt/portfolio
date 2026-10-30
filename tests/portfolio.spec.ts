@@ -87,13 +87,15 @@ test("renders all portfolio projects", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Embedded systems, robotics, simulation, and software.",
   );
-  await expect(page.getByRole("heading", { name: "Simulating coordinated field robots." })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Satellite telemetry for remote field sensors." })).toBeAttached();
-  await expect(page.getByRole("heading", { name: "More colours, same printer." })).toBeAttached();
+  await expect(page.getByRole("heading", { name: "Robot fleet simulator." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Satellite-connected field sensors." })).toBeAttached();
+  await expect(page.getByRole("heading", { name: "Colour mixing for OrcaSlicer." })).toBeAttached();
   await expect(
-    page.getByRole("heading", { name: "Telemetry and control for an autonomous payload drone." }),
+    page.getByRole("heading", { name: "Drone telemetry and control." }),
   ).toBeAttached();
-  await expect(page.getByRole("link", { name: "GitHub ↗" })).toHaveAttribute(
+  await expect(page.getByRole("heading", { name: "Hingaa", exact: true })).toBeAttached();
+  await expect(page.locator("#hingaa a")).toHaveAttribute("href", "https://github.com/xSil3nt/hingaa");
+  await expect(page.getByRole("link", { name: "GitHub ↗", exact: true })).toHaveAttribute(
     "href",
     "https://github.com/xSil3nt",
   );
