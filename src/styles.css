@@ -175,7 +175,7 @@ main,
   z-index: 100;
   height: var(--header-h);
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 var(--pad);
   border-bottom: 1px solid transparent;
@@ -1006,7 +1006,7 @@ a.archive-row:hover p {
 
 .site-footer {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 2rem;
   padding: 1.5rem var(--pad);
@@ -1356,9 +1356,6 @@ html.js-ready .reveal {
     grid-template-columns: 1fr auto;
   }
 
-  .site-footer span:nth-child(2) {
-    display: none;
-  }
 }
 
 @keyframes flow-y {
