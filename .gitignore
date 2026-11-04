@@ -4,5 +4,3 @@ test-results/
 playwright-report/
 *.log
 
-# Private academic records are kept locally, outside the public portfolio.
-/Documents/
